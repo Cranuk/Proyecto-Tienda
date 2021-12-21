@@ -1,0 +1,10 @@
+<ifModule mod_rewrite.c>
+    #Activar Rewrite
+    RewriteEngine on
+    ErrorDocument 404 http://localhost/codificacion/Udemy/php/proyecto-php-poo/error/
+
+    RewriteCond %{SCRIPT_FILENAME} !-d
+    RewriteCond %{SCRIPT_FILENAME} !-f
+
+    RewriteRule ^(.*)/(.*) index.php?controlador=$1&accion=$2
+</ifModule>
