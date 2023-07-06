@@ -1,4 +1,5 @@
 <?php
+require_once 'configuracion/conexion.php';
 class ProductoModelo{
     private $id;
     private $categoria_id;
@@ -9,11 +10,6 @@ class ProductoModelo{
     private $oferta;
     private $fecha;
     private $imagen;
-    private $db;
-
-    public function __construct(){
-        $this -> db = BaseDatos::conectar();
-    }
 
     //ANCHOR: getters
     public function getId(){
@@ -55,109 +51,152 @@ class ProductoModelo{
     //ANCHOR: setters
     public function setId($id){
         $this->id = $id;
-
         return $this;
     }
 
     public function setCategoria_id($categoria_id){
         $this->categoria_id = $categoria_id;
-
         return $this;
     }
 
     public function setNombre($nombre){
-        $this->nombre = $this->db->real_escape_string($nombre);
-
+        $this->nombre = $this->$nombre;
         return $this;
     }
 
     public function setDescripcion($descripcion){
-        $this->descripcion = $this->db->real_escape_string($descripcion);
-
+        $this->descripcion = $this->$descripcion;
         return $this;
     }
 
     public function setPrecio($precio){
-        $this->precio = $this->db->real_escape_string($precio);
-
+        $this->precio = $this->$precio;
         return $this;
     }
 
     public function setStock($stock){
-        $this->stock = $this->db->real_escape_string($stock);
-
+        $this->stock = $this->$stock;
         return $this;
     }
 
     public function setOferta($oferta){
-        $this->oferta = $this->db->real_escape_string($oferta);
-
+        $this->oferta = $this->$oferta;
         return $this;
     }
 
     public function setFecha($fecha){
         $this->fecha = $fecha;
-
         return $this;
     }
 
     public function setImagen($imagen){
         $this->imagen = $imagen;
-
         return $this;
     }
 
     //ANCHOR: otras funciones
     public function mostrarProductos(){
-        $productos = $this->db->query("SELECT * FROM productos ORDER BY id_producto DESC");
-        return $productos;
+        $base = Conexion::conectar();
+        $sql = "SELECT * FROM productos ORDER BY id_producto DESC";
+        $consulta = $base->prepare($sql);
+        $resultado = $consulta->execute();
+        return $resultado;
     }
 
     public function mostrarDestacados($limite){
-        $productos = $this->db->query("SELECT * FROM productos WHERE pros_stock > 0 ORDER BY RAND() LIMIT {$limite}");
-        return $productos;
+        $base = Conexion::conectar();
+        $sql = "SELECT * FROM productos WHERE pros_stock > 0 ORDER BY RAND() LIMIT {$limite}";
+        $consulta = $base->prepare($sql);
+        $resultado = $consulta->execute();
+        return $resultado;
     }
 
     public function mostrarProductoCategoria(){
-        $productos = $this->db->query("SELECT * FROM productos WHERE categoria_id = '{$this->getCategoria_id()}' ORDER BY id_producto DESC");
-        return $productos;
+        $base = Conexion::conectar();
+        $categoria_id = $this->getCategoria_id();
+        $sql = "SELECT * FROM productos WHERE categoria_id = :categoria_id ORDER BY id_producto DESC";
+        $consulta = $base->prepare($sql);
+        $consulta -> bindParam(':categoria_id', $categoria_id);
+        $resultado = $consulta -> execute();
+        return $resultado;
     }
 
     public function elegirProducto(){
-        $producto = $this->db->query("SELECT * FROM productos WHERE id_producto = {$this->getId()}");
-        return $producto->fetch_object(); //NOTE: lo devolvemos como un objeto para utilizar sus datos
+        $base = Conexion::conectar();
+        $producto_id = $this->getId();
+        $sql = "SELECT * FROM productos WHERE id_producto = :producto_id";
+        $consulta = $base->prepare($sql);
+        $consulta -> bindParam(':producto_id', $producto_id);
+        $consulta -> execute();
+        $resultado = $consulta -> fetch(PDO::FETCH_ASSOC);
+        return $resultado; //NOTE: lo devolvemos como un objeto para utilizar sus datos
     }
 
     public function guardar(){
-        $sql = "INSERT INTO productos VALUES (NULL, {$this->getCategoria_id()}, '{$this->getNombre()}', '{$this->getDescripcion()}', {$this->getPrecio()}, {$this->getStock()}, NULL, CURDATE(), '{$this->getImagen()}')";
-        $guardar = $this->db->query($sql);
+        $base = Conexion::conectar();
+        $categoria_id = $this->getCategoria_id();
+        $nombre = $this->getNombre();
+        $descripcion = $this->getDescripcion();
+        $precio = $this->getPrecio();
+        $stock = $this->getStock();
+        $imagen = $this->getImagen();
+        $sql = "INSERT INTO productos VALUES (NULL, :categoria_id, :nombre, :descripcion, :precio, :stock, NULL, CURDATE(), :imagen)";
+        $consulta = $base->prepare($sql);
+        $consulta -> bindParam(':categoria_id', $categoria_id);
+        $consulta -> bindParam(':nombre', $nombre);
+        $consulta -> bindParam(':descripcion', $descripcion);
+        $consulta -> bindParam('precio', $precio);
+        $consulta -> bindParam('stock', $stock);
+        $consulta -> bindParam('imagen', $imagen);
+        $guardo = $consulta -> execute();
         $resultado = false;
-        if ($guardar) {
+        if ($guardo) {
             $resultado = true;
         }
         return $resultado;
     }
 
     public function editar(){
-        $sql = "UPDATE productos SET categoria_id={$this->getCategoria_id()}, pros_nombre='{$this->getNombre()}', pros_descripcion='{$this->getDescripcion()}', pros_precio={$this->getPrecio()}, pros_stock={$this->getStock()}";
-        if($this->getImagen() != null){//NOTE: actualiza la imagen si cargo una nueva para actualizar la que esta en la base de datos
-            $sql .= ", pros_imagen='{$this->getImagen()}'";
+        $base = Conexion::conectar();
+        $producto_id = $this -> getId();
+        $categoria_id = $this -> getCategoria_id();
+        $nombre = $this -> getNombre();
+        $descripcion = $this -> getDescripcion();
+        $precio = $this -> getPrecio();
+        $stock = $this -> getStock();
+        $imagen = $this -> getImagen();
+        $sql = "UPDATE productos SET categoria_id = :categoria_id, pros_nombre = :nombre, pros_descripcion = :descripcion, pros_precio = :precio, pros_stock = :stock";
+        if($imagen != null){ //NOTE: actualiza la imagen si cargo una nueva para actualizar la que esta en la base de datos
+            $sql .= ", pros_imagen = :imagen";
         }
-        $sql .= " WHERE id_producto = {$this->getId()};";
-        $actualizar = $this->db->query($sql);
-
+        $sql .= " WHERE id_producto = :producto_id";
+        $consulta = $base -> prepare($sql);
+        $consulta -> bindParam(':categoria_id', $categoria_id);
+        $consulta -> bindParam(':nombre', $nombre);
+        $consulta -> bindParam(':descripcion', $descripcion);
+        $consulta -> bindParam(':precio', $precio);
+        $consulta -> bindParam(':stock', $stock);
+        $consulta -> bindParam(':producto_id', $producto_id);
+        if($imagen != null){ //NOTE: actualiza la imagen si cargo una nueva para actualizar la que esta en la base de datos
+            $consulta -> bindParam(':imagen', $imagen);
+        }
+        $guardo = $consulta -> execute();
         $resultado = false;
-        if ($actualizar) {
+        if ($guardo) {
             $resultado = true;
         }
         return $resultado;
     }
 
     public function eliminar(){
-        $sql = "DELETE FROM productos WHERE id_producto = {$this->getId()}";
-        $borrar = $this->db->query($sql);
+        $base = Conexion::conectar();
+        $producto_id = $this -> getId();
+        $sql = "DELETE FROM productos WHERE id_producto = :producto_id";
+        $consulta = $base -> prepare($sql);
+        $consulta -> bindParam(':producto_id', $producto_id);
+        $borro = $consulta -> execute();
         $resultado = false;
-        if ($borrar) {
+        if ($borro) {
             $resultado = true;
         }
         return $resultado;

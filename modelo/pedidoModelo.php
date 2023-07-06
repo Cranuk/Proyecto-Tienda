@@ -1,4 +1,5 @@
 <?php
+require_once 'configuracion/conexion.php';
 class PedidoModelo{
     private $id;
     private $usuario_id;
@@ -8,12 +9,7 @@ class PedidoModelo{
     private $costo;
     private $estado;
     private $fecha;
-    private $hora;     
-    private $db; 
-
-    public function __construct(){
-        $this -> db = BaseDatos::conectar();
-    }
+    private $hora;
 
     //ANCHOR: getters
     public function getId(){
@@ -55,138 +51,180 @@ class PedidoModelo{
     //ANCHOR: setters
     public function setHora($hora){
         $this->hora = $hora;
-
         return $this;
     }
 
     public function setFecha($fecha){
         $this->fecha = $fecha;
-
         return $this;
     }
 
     public function setEstado($estado){
         $this->estado = $estado;
-
         return $this;
     }
 
     public function setCosto($costo){
         $this->costo = $costo;
-
         return $this;
     }
 
     public function setProvincia($provincia){
-        $this->provincia = $this->db->real_escape_string($provincia);
-
+        $this->provincia = $this->$provincia;
         return $this;
     }
 
     public function setLocalidad($localidad){
-        $this->localidad = $this->db->real_escape_string($localidad);
-
+        $this->localidad = $this->$localidad;
         return $this;
     }
 
     public function setDireccion($direccion){
-        $this->direccion = $this->db->real_escape_string($direccion);
-
+        $this->direccion = $this->$direccion;
         return $this;
     }
 
     public function setUsuario_id($usuario_id){
         $this->usuario_id = $usuario_id;
-
         return $this;
     }
 
     public function setId($id){
         $this->id = $id;
-
         return $this;
     }
 
     //ANCHOR: otras funciones
     public function mostrarPedidos(){
-        $pedidos = $this->db->query("SELECT * FROM pedidos ORDER BY id_pedido DESC");
-        return $pedidos;
+        $base = Conexion::conectar();
+        $sql = "SELECT * FROM pedidos ORDER BY id_pedido DESC";
+        $consulta = $base -> prepare($sql);
+        $resultado = $consulta->execute();
+        return $resultado;
     }
 
     public function elegirPedido(){
-        $pedido = $this->db->query("SELECT * FROM pedidos WHERE id_pedido = {$this->getId()}");
-        return $pedido->fetch_object(); //NOTE: lo devolvemos como un objeto para utilizar sus datos
+        $base = Conexion::conectar();
+        $pedido_id = $this->getId();
+        $sql = "SELECT * FROM pedidos WHERE id_pedido = :pedido_id";
+        $consulta = $base -> prepare($sql);
+        $consulta -> bindParam(':pedido_id', $pedido_id);
+        $consulta -> execute();
+        $resultado = $consulta -> fetch(PDO::FETCH_ASSOC);
+        return $resultado; //NOTE: lo devolvemos como un objeto para utilizar sus datos
     }
 
     public function pedidoUsuario(){
-        $consulta = "SELECT * FROM pedidos WHERE usuario_id = {$this->getUsuario_id()} ORDER BY id_pedido DESC LIMIT 1";
-        $pedido = $this->db->query($consulta);
-        return $pedido->fetch_object(); //NOTE: lo devolvemos como un objeto para utilizar sus datos
+        $base = Conexion::conectar();
+        $usuario_id = $this->getUsuario_id();
+        $sql = "SELECT * FROM pedidos WHERE usuario_id = :usuario_id ORDER BY id_pedido DESC LIMIT 1";
+        $consulta = $base -> prepare($sql);
+        $consulta -> bindParam(':usuario_id', $usuario_id);
+        $consulta -> execute();
+        $resultado =  $consulta -> fetch(PDO::FETCH_ASSOC);
+        return $resultado; //NOTE: lo devolvemos como un objeto para utilizar sus datos
     }
 
     public function productoUsuario($id){
-        $consulta = "SELECT pr.*, lp.* FROM productos pr ";
-        $consulta .= "INNER JOIN lineaspedidos lp ON pr.id_producto = lp.producto_id ";
-        $consulta .= "WHERE lp.pedido_id = {$id}";
-        $producto = $this->db->query($consulta);
-        return $producto;
+        $base = Conexion::conectar();
+        $sql = "SELECT pr.*, lp.* FROM productos pr ";
+        $sql .= "INNER JOIN lineaspedidos lp ON pr.id_producto = lp.producto_id ";
+        $sql .= "WHERE lp.pedido_id = :id";
+        $consulta = $base -> prepare($sql);
+        $consulta -> bindParam(':id', $id);
+        $consulta -> execute();
+        $resultado = $consulta -> fetch(PDO::FETCH_ASSOC);
+        return $resultado;
     }
 
     public function datosUsuario($id){
-        $consulta = "SELECT u.* FROM pedidos p ";
-        $consulta .= "INNER JOIN usuarios u ON p.usuario_id = u.id_usuario ";
-        $consulta .= "WHERE id_pedido = {$id}";
-        $datoUsuario = $this->db->query($consulta);
-        return $datoUsuario->fetch_object(); //NOTE: lo devolvemos como un objeto para utilizar sus datos
+        $base = Conexion::conectar();
+        $sql = "SELECT u.* FROM pedidos p ";
+        $sql .= "INNER JOIN usuarios u ON p.usuario_id = u.id_usuario ";
+        $sql .= "WHERE id_pedido = :id";
+        $consulta = $base -> prepare($sql);
+        $consulta -> bindParam(':id', $id);
+        $consulta -> execute();
+        $resultado = $consulta -> fetch(PDO::FETCH_ASSOC);
+        return $resultado; //NOTE: lo devolvemos como un objeto para utilizar sus datos
     }
 
     public function listaPedidoUsuario(){
-        $consulta = "SELECT * FROM pedidos WHERE usuario_id = {$this->getUsuario_id()} ORDER BY id_pedido DESC";
-        $pedido = $this->db->query($consulta);
-        return $pedido;
+        $base = Conexion::conectar();
+        $usuario_id = $this -> getUsuario_id();
+        $sql = "SELECT * FROM pedidos WHERE usuario_id = :usuario_id ORDER BY id_pedido DESC";
+        $consulta = $base -> prepare($sql);
+        $consulta -> bindParam(':usuario_id', $usuario_id);
+        $resultado = $consulta -> execute();
+        return $resultado;
     }
 
     public function guardar(){
-        $sql = "INSERT INTO pedidos VALUES (NULL, {$this->getUsuario_id()}, '{$this->getDireccion()}', '{$this->getLocalidad()}', '{$this->getProvincia()}', {$this->getCosto()}, 'pendiente', CURDATE(), CURTIME())";
-        $guardar = $this->db->query($sql);
+        $base = Conexion::conectar();
+        $usuario_id = $this -> getUsuario_id();
+        $direccion = $this -> getDireccion();
+        $localidad = $this -> getLocalidad();
+        $provincia = $this -> getProvincia();
+        $costo = $this -> getCosto();
+        $sql = "INSERT INTO pedidos VALUES (NULL, :usuario_id, :direccion, :localidad, :provincia, :costo, 'pendiente', CURDATE(), CURTIME())";
+        $consulta = $base -> prepare($sql);
+        $consulta -> bindParam(':usuario_id', $usuario_id);
+        $consulta -> bindParam(':direccion', $direccion);
+        $consulta -> bindParam(':localidad', $localidad);
+        $consulta -> bindParam(':provincia', $provincia);
+        $consulta -> bindParam(':costo', $costo);
+        $guardo = $consulta -> execute();
         $resultado = false;
-        if ($guardar) {
+        if ($guardo) {
             $resultado = true;
         }
         return $resultado;
     }
 
     public function actualizarStock(){
+        $base = Conexion::conectar();
         $sql = "SELECT LAST_INSERT_ID() as pedido";
-        $consulta = $this->db->query($sql);
-        $pedido_id = $consulta->fetch_object()->pedido;
+        $consulta = $base -> prepare($sql);
+        $consulta -> execute();
+        $row = $consulta->fetch(PDO::FETCH_OBJ);
+        $pedido = $row->pedido;
 
         foreach ($_SESSION['carrito'] as $carrito){
             $producto = $carrito['producto_datos'];
-            $actualizarStock = "UPDATE productos SET pros_stock = pros_stock - {$carrito['cantidad']} WHERE id_producto = {$producto->id_producto}";
-            $guardar = $this->db->query($actualizarStock);
+            $sql2 = "UPDATE productos SET pros_stock = pros_stock - :cantidad WHERE id_producto = :id_producto";
+            $consulta2 = $base -> prepare($sql2);
+            $consulta2 -> bindParam(':cantidad', $carrito['cantidad']);
+            $consulta -> bindParam(':producto_id', $producto->id_producto);
+            $guardo = $consulta -> execute();
         }
         
         $resultado = false;
-        if ($guardar) {
+        if ($guardo) {
             $resultado = true;
         }
         return $resultado;
     }
 
     public function guardarLinea(){
+        $base = Conexion::conectar();
         $sql = "SELECT LAST_INSERT_ID() as pedido";
-        $consulta = $this->db->query($sql);
-        $pedido_id = $consulta->fetch_object()->pedido;
+        $consulta = $base -> prepare($sql);
+        $consulta -> execute();
+        $row = $consulta->fetch(PDO::FETCH_OBJ);
+        $pedido = $row->pedido;
 
         foreach ($_SESSION['carrito'] as $carrito){
             $producto = $carrito['producto_datos'];
-            $insertar = "INSERT INTO lineaspedidos VALUES(NULL, {$pedido_id}, {$producto->id_producto}, {$carrito['cantidad']})";
-            $guardar = $this->db->query($insertar);
+            $sql2 = "INSERT INTO lineaspedidos VALUES(NULL, :pedido, :id_producto, :cantidad)";
+            $consulta = $base -> prepare($sql2);
+            $consulta -> bindParam(':pedido', $pedido);
+            $consulta -> bindParam(':id_producto', $producto->id_producto);
+            $consulta -> bindParam(':cantidad', $carrito['cantidad']);
+            $guardo = $consulta -> execute();
         }
         
         $resultado = false;
-        if ($guardar) {
+        if ($guardo) {
             $resultado = true;
         }
         return $resultado;
@@ -194,11 +232,17 @@ class PedidoModelo{
     }
 
     public function cambiarEstado(){
-        $sql = "UPDATE pedidos SET peos_estado = '{$this->getEstado()}' WHERE id_pedido = {$this->getId()}";
-        $actualizar = $this->db->query($sql);
-
+        $base = Conexion::conectar();
+        $estado = $this -> getEstado();
+        $pedido_id = $this -> getId();
+        $sql = "UPDATE pedidos SET peos_estado = :estado WHERE id_pedido = :pedido_id";
+        $consulta = $base -> prepare($sql);
+        $consulta -> bindParam(':estado', $estado);
+        $consulta -> bindParam(':pedido_id', $pedido_id);
+        $actualizo = $consulta -> execute();
+        
         $resultado = false;
-        if ($actualizar) {
+        if ($actualizo) {
             $resultado = true;
         }
         return $resultado;

@@ -1,13 +1,8 @@
 <?php
-
+require_once 'configuracion/conexion.php';
 class CategoriaModelo{
     private $id;
     private $nombre;
-    private $db;
-
-    public function __construct(){
-        $this -> db = BaseDatos::conectar();
-    }
 
     //ANCHOR: getters
     public function getNombre(){
@@ -20,7 +15,7 @@ class CategoriaModelo{
 
     //ANCHOR: setters
     public function setNombre($nombre){
-        $this->nombre = $this->db->real_escape_string($nombre);
+        $this->nombre = $this->$nombre;
         return $this;
     }
 
@@ -29,22 +24,35 @@ class CategoriaModelo{
         return $this;
     }
 
-    //ANCHOR: otras funciones
+    //ANCHOR: metodos
     public function mostrarCategorias(){
-        $categorias = $this->db->query("SELECT * FROM categorias ORDER BY id_categoria DESC");
-        return $categorias;
+        $base = Conexion::conectar();
+        $sql = "SELECT * FROM categorias ORDER BY id_categoria DESC";
+        $consulta = $base -> prepare($sql);
+        $consulta -> execute();
+        return $consulta;
     }
 
     public function verCategoria(){
-        $categoria = $this->db->query("SELECT * FROM categorias WHERE id_categoria = '{$this->getId()}'");
-        return $categoria->fetch_object();
+        $base = Conexion::conectar();
+        $categoria_id = $this->getId(); 
+        $sql = "SELECT * FROM categorias WHERE id_categoria = :categoria_id";
+        $consulta = $base -> prepare($sql);
+        $consulta -> bindParam(':categoria_id', $categoria_id);
+        $consulta -> execute();
+        $resultado = $consulta -> fetch(PDO::FETCH_ASSOC);
+        return $resultado;
     }
 
     public function guardar(){
-        $sql = "INSERT INTO categorias VALUES (NULL, '{$this->getNombre()}')";
-        $guardar = $this->db->query($sql);
+        $base = Conexion::conectar();
+        $nombre = $this -> getNombre();
+        $sql = "INSERT INTO categorias VALUES (NULL, :nombre)";
+        $consulta = $base -> prepare($sql);
+        $consulta -> bindParam(':nombre', $nombre);
+        $guardo = $consulta -> execute();
         $resultado = false;
-        if ($guardar) {
+        if ($guardo) {
             $resultado = true;
         }
         return $resultado;

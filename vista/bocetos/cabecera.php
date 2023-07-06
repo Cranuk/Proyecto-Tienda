@@ -30,11 +30,11 @@
                 <li>
                     <a href="<?=base_url?>">Inicio</a>
                 </li>
-                <?php while ($categoria = $categorias->fetch_object()): //NOTE: hacemos un bucle para mostrar todas las categorias?>
+                <?php foreach ($categorias as $categoria): //NOTE: hacemos un bucle para mostrar todas las categorias?>
                     <li>
-                        <a href="<?= base_url ?>categoria/ver&id=<?=$categoria->id_categoria?>"><?=$categoria->caia_nombre?></a>
+                        <a href="<?= base_url ?>categoria/ver&id=<?=$categoria['id_categoria']?>"><?=$categoria['caia_nombre']?></a>
                     </li>
-                <?php endwhile;?>
+                <?php endforeach;?>
             </ul>
         </nav>
 

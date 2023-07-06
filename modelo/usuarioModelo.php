@@ -1,4 +1,5 @@
 <?php
+require_once 'configuracion/conexion.php';
 class UsuarioModelo{
     private $id;
     private $nombre;
@@ -7,11 +8,6 @@ class UsuarioModelo{
     private $clave;
     private $imagen;
     private $rol;
-    private $db;
-
-    public function __construct(){
-        $this -> db = BaseDatos::conectar();
-    }
 
     //ANCHOR: getters
     public function getId(){
@@ -31,7 +27,7 @@ class UsuarioModelo{
     }
 
     public function getClave(){
-        return password_hash($this->db->real_escape_string($this->clave),PASSWORD_BCRYPT, ['cost' => 4]);// NOTE: la clave del usuario se codifica para mejor seguridad
+        return $this->clave;
     }
 
     public function getImagen(){
@@ -49,17 +45,17 @@ class UsuarioModelo{
     }
 
     public function setNombre($nombre){
-        $this->nombre = $this->db->real_escape_string($nombre);
+        $this->nombre = $this->$nombre;
         return $this;
     }
 
     public function setApellido($apellido){
-        $this->apellido = $this->db->real_escape_string($apellido);
+        $this->apellido = $this->$apellido;
         return $this;
     }
 
     public function setCorreo($correo){
-        $this->correo = $this->db->real_escape_string($correo);
+        $this->correo = $this->$correo;
         return $this;
     }
 
@@ -80,30 +76,41 @@ class UsuarioModelo{
 
     //ANCHOR: metodos de clase
     public function guardar(){
-        $sql = "INSERT INTO usuarios VALUES (NULL, '{$this->getNombre()}', '{$this->getApellido()}', '{$this->getCorreo()}', '{$this->getClave()}', NULL, 'usuario')";
-        $guardar = $this->db->query($sql);
+        $base = Conexion::conectar();
+        $nombre = $this -> getNombre();
+        $apellido = $this -> getApellido();
+        $correo = $this -> getCorreo();
+        $clave = $this -> getClave();
+        $sql = "INSERT INTO usuarios VALUES (NULL, :nombre, :apellido, :correo, :clave, NULL, 'usuario')";
+        $consulta = $base -> prepare($sql);
+        $consulta -> bindParam(':nombre', $nombre);
+        $consulta -> bindParam(':apellido', $apellido);
+        $consulta -> bindParam(':correo', $correo);
+        $consulta -> bindParam(':clave', $clave);
+        $guardo = $consulta -> execute();
         $resultado = false;
-        if ($guardar) {
+        if ($guardo) {
             $resultado = true;
         }
         return $resultado;
     }
 
     public function logeo(){
-        $resultado = false; //NOTE: Esta variable es una bandera con la cual verifica si esta todo en orden
-        $correo = $this->correo;
-        $clave = $this->clave;
+        $base = Conexion::conectar();
+        $correo = $this->getCorreo();
+        $clave = $this->getClave();
+        $sql = "SELECT * FROM usuarios WHERE usos_correo = :correo"; // NOTE: comprobar si existe el usuario
+        $consulta = $base -> prepare($sql);
+        $consulta -> bindParam(':correo', $correo);
+        $existe = $consulta -> execute();
+        $duplicado = $consulta->rowCount();
 
-        // NOTE: comprobar si existe el usuario
-        $sql = "SELECT * FROM usuarios WHERE usos_correo = '$correo'";
-        $buscar = $this->db->query($sql);
-
-        if ($buscar && $buscar->num_rows == 1) {
-            $usuario = $buscar->fetch_object(); //NOTE: Nos da un objeto con los datos traidos con la query
-            //NOTE: verificar la clave
-            $verificado = password_verify($clave, $usuario->usos_clave); //NOTE: comprobamos la clave que ingresamos con la guardada en la base
-            if ($verificado) { //NOTE: si esta todo en orden guadamos el objeto en una variable y retornamos los datos
+        if ($existe && $duplicado == 1) {
+            $usuario = $consulta->fetch(PDO::FETCH_OBJ);
+            if ($clave === $usuario->usos_clave) { //NOTE: si esta todo en orden guadamos el objeto en una variable y retornamos los datos
                 $resultado = $usuario;
+            }else{
+                $resultado = null;
             }
         }
         return $resultado;
