@@ -3,7 +3,7 @@
 session_start();
 //TODO: desde el archivo index se recomienda solicitar todos los archivos necesarios para la correcta funcionalidad de tu programa
 require_once 'autoload.php'; //NOTE: Solicitamos el archivo que no llama los controladores correpondientes
-require_once "configuracion/db.php"; //NOTE: solicitamos el archivo para poder utilizar la base de datos
+require_once "configuracion/conexion.php"; //NOTE: solicitamos el archivo para poder utilizar la base de datos
 require_once 'configuracion/parametros.php'; //NOTE: Solicitamos el archivo donde se definieron variables constantes
 require_once 'helpers/utilidades.php'; //NOTE: Solicitamos librerias que nos serviran para tareas especificas
 require_once 'vista/bocetos/cabecera.php'; //NOTE: Solicitamos el archivo para mostrar la cabecera de la pagina web
