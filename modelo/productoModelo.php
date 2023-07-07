@@ -105,10 +105,17 @@ class ProductoModelo{
 
     public function mostrarDestacados($limite){
         $base = Conexion::conectar();
-        $sql = "SELECT * FROM productos WHERE pros_stock > 0 ORDER BY RAND() LIMIT {$limite}";
+        $sql = "SELECT * FROM productos WHERE pros_stock > 0 ORDER BY RAND() LIMIT :limite";
         $consulta = $base->prepare($sql);
-        $resultado = $consulta->execute();
-        return $resultado;
+        $consulta -> bindValue(':limite', $limite, PDO::PARAM_INT);
+        $consulta->execute();
+        $resultado = $consulta->fetchAll(PDO::FETCH_ASSOC);
+    
+        if ($resultado) {
+            return $resultado;
+        } else {
+            return []; // NOTE: Devuelve un array vacío si no hay productos destacados
+        }
     }
 
     public function mostrarProductoCategoria(){
@@ -117,8 +124,14 @@ class ProductoModelo{
         $sql = "SELECT * FROM productos WHERE categoria_id = :categoria_id ORDER BY id_producto DESC";
         $consulta = $base->prepare($sql);
         $consulta -> bindParam(':categoria_id', $categoria_id);
-        $resultado = $consulta -> execute();
-        return $resultado;
+        $consulta -> execute();
+        $resultado = $consulta->fetchAll(PDO::FETCH_ASSOC);
+    
+        if ($resultado) {
+            return $resultado;
+        } else {
+            return []; // NOTE: Devuelve un array vacío si no hay productos destacados
+        }
     }
 
     public function elegirProducto(){
