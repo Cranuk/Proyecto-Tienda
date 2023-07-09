@@ -21,7 +21,7 @@ class usuarioControlador{
                 $usuario->setNombre($nombre);
                 $usuario->setApellido($apellido);
                 $usuario->setCorreo($correo);
-                $usuario->setClave($clave);
+                $usuario->setClave(md5($clave));
                 $guardado = $usuario->guardar();
 
                 if ($guardado) {
@@ -44,7 +44,7 @@ class usuarioControlador{
             //ANCHOR: Consulta a la base
             $usuario = new UsuarioModelo();
             $usuario->setCorreo($_POST['correo']);
-            $usuario->setClave($_POST['clave']);
+            $usuario->setClave(md5($_POST['clave']));
             $identidad = $usuario->logeo(); //NOTE: guardamos el objeto en una variable
             if ($identidad && is_object($identidad)) {
                 //ANCHOR: Crear una sesion

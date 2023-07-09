@@ -45,17 +45,17 @@ class UsuarioModelo{
     }
 
     public function setNombre($nombre){
-        $this->nombre = $this->$nombre;
+        $this->nombre = $nombre;
         return $this;
     }
 
     public function setApellido($apellido){
-        $this->apellido = $this->$apellido;
+        $this->apellido = $apellido;
         return $this;
     }
 
     public function setCorreo($correo){
-        $this->correo = $this->$correo;
+        $this->correo = $correo;
         return $this;
     }
 
@@ -103,11 +103,11 @@ class UsuarioModelo{
         $consulta = $base -> prepare($sql);
         $consulta -> bindParam(':correo', $correo);
         $existe = $consulta -> execute();
-        $duplicado = $consulta->rowCount();
+        $duplicado = $consulta -> rowCount(); // NOTE: comprobamos que solo exista solo su perfil
 
         if ($existe && $duplicado == 1) {
             $usuario = $consulta->fetch(PDO::FETCH_OBJ);
-            if ($clave === $usuario->usos_clave) { //NOTE: si esta todo en orden guadamos el objeto en una variable y retornamos los datos
+            if ($clave === $usuario->usos_clave) { //NOTE: si esta todo en orden guardamos el objeto en una variable y retornamos los datos
                 $resultado = $usuario;
             }else{
                 $resultado = null;
