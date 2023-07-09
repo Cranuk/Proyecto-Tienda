@@ -118,7 +118,6 @@ class pedidoControlador
 
     public function listado(){
         Utilidades::esAdmin(); // NOTE: usamos el helper para comprobar si el usuario tiene categoria administrador
-        $gestion = true;
         $dato = new PedidoModelo();
         $pedidos = $dato->mostrarPedidos();
         require_once 'vista/pedidos/misPedidos.php';

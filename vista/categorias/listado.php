@@ -6,21 +6,13 @@
 
 <table class="tabla">
     <tr>
-        <th>
-            Id
-        </th>
-        <th>
-            Categoria
-        </th>
+        <th>Id</th>
+        <th>Categoria</th>
     </tr>
-    <?php while ($categoria = $categorias->fetch_object()):?>
+    <?php foreach($categorias as $categoria):?>
         <tr>
-            <td>
-                <?=$categoria->id_categoria?>
-            </td>
-            <td>
-                <?=$categoria->caia_nombre?>
-            </td>
+            <td><?=$categoria['id_categoria']?></td>
+            <td><?=$categoria['caia_nombre']?></td>
         </tr>
-    <?php endwhile;?>
+    <?php endforeach;?>
 </table>

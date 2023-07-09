@@ -18,47 +18,25 @@
 <?php Utilidades::borrarSesion('borrado');?>
 <table class="tabla">
     <tr>
-        <th>
-            Id
-        </th>
-        <th>
-            Nombre
-        </th>
-        <th>
-            Precio
-        </th>
-        <th>
-            Stock
-        </th>
-        <th>
-            Imagen
-        </th>
-        <th>
-            Herramientas
-        </th>
+        <th>Id</th>
+        <th>Nombre</th>
+        <th>Precio</th>
+        <th>Stock</th>
+        <th>Imagen</th>
+        <th>Herramientas</th>
     </tr>
-    <?php while ($producto = $productos->fetch_object()):?>
+    <?php foreach ($productos as $producto):?>
         <tr>
-            <td>
-                <?=$producto->id_producto?>
-            </td>
-            <td>
-                <?=$producto->pros_nombre?>
-            </td>
-            <td>
-                <?=$producto->pros_precio?>
-            </td>
-            <td>
-                <?=$producto->pros_stock?>
-            </td>
-            <td>
-                <?=$producto->pros_imagen?>
-            </td>
+            <td><?=$producto['id_producto']?></td>
+            <td><?=$producto['pros_nombre']?></td>
+            <td><?=$producto['pros_precio']?></td>
+            <td><?=$producto['pros_stock']?></td>
+            <td><?=$producto['pros_imagen']?></td>
             <td>
                 <!--NOTE: los botones creados al estar en un bucle les debemos asignar el id para saber a que producto en especifico deseamos eliminar o editar mediante parametro GET-->
-                <a href="<?=base_url?>producto/eliminar&id=<?=$producto->id_producto?>" class="boton boton-rojo boton-herramienta">Eliminar</a>
-                <a href="<?=base_url?>producto/editar&id=<?=$producto->id_producto?>" class="boton boton-azul boton-herramienta">Editar</a>
+                <a href="<?=base_url?>producto/eliminar&id=<?=$producto['id_producto']?>" class="boton boton-rojo boton-herramienta">Eliminar</a>
+                <a href="<?=base_url?>producto/editar&id=<?=$producto['id_producto']?>" class="boton boton-azul boton-herramienta">Editar</a>
             </td>
         </tr>
-    <?php endwhile;?>
+    <?php endforeach;?>
 </table>

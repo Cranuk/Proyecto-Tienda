@@ -70,17 +70,17 @@ class PedidoModelo{
     }
 
     public function setProvincia($provincia){
-        $this->provincia = $this->$provincia;
+        $this->provincia = $provincia;
         return $this;
     }
 
     public function setLocalidad($localidad){
-        $this->localidad = $this->$localidad;
+        $this->localidad = $localidad;
         return $this;
     }
 
     public function setDireccion($direccion){
-        $this->direccion = $this->$direccion;
+        $this->direccion = $direccion;
         return $this;
     }
 
@@ -99,7 +99,8 @@ class PedidoModelo{
         $base = Conexion::conectar();
         $sql = "SELECT * FROM pedidos ORDER BY id_pedido DESC";
         $consulta = $base -> prepare($sql);
-        $resultado = $consulta->execute();
+        $consulta->execute();
+        $resultado = $consulta -> fetch(PDO::FETCH_ASSOC);
         return $resultado;
     }
 
@@ -155,7 +156,8 @@ class PedidoModelo{
         $sql = "SELECT * FROM pedidos WHERE usuario_id = :usuario_id ORDER BY id_pedido DESC";
         $consulta = $base -> prepare($sql);
         $consulta -> bindParam(':usuario_id', $usuario_id);
-        $resultado = $consulta -> execute();
+        $consulta -> execute();
+        $resultado = $consulta -> fetch(PDO::FETCH_ASSOC);
         return $resultado;
     }
 

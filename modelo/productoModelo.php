@@ -100,6 +100,7 @@ class ProductoModelo{
         $sql = "SELECT * FROM productos ORDER BY id_producto DESC";
         $consulta = $base->prepare($sql);
         $resultado = $consulta->execute();
+        $resultado = $consulta->fetchAll(PDO::FETCH_ASSOC);
         return $resultado;
     }
 
