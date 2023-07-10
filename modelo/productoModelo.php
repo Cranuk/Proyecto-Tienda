@@ -60,27 +60,27 @@ class ProductoModelo{
     }
 
     public function setNombre($nombre){
-        $this->nombre = $this->$nombre;
+        $this->nombre = $nombre;
         return $this;
     }
 
     public function setDescripcion($descripcion){
-        $this->descripcion = $this->$descripcion;
+        $this->descripcion = $descripcion;
         return $this;
     }
 
     public function setPrecio($precio){
-        $this->precio = $this->$precio;
+        $this->precio = $precio;
         return $this;
     }
 
     public function setStock($stock){
-        $this->stock = $this->$stock;
+        $this->stock = $stock;
         return $this;
     }
 
     public function setOferta($oferta){
-        $this->oferta = $this->$oferta;
+        $this->oferta = $oferta;
         return $this;
     }
 
