@@ -15,7 +15,7 @@ class CategoriaModelo{
 
     //ANCHOR: setters
     public function setNombre($nombre){
-        $this->nombre = $this->$nombre;
+        $this->nombre = $nombre;
         return $this;
     }
 
