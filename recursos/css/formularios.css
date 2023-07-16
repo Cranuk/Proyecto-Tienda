@@ -1,9 +1,4 @@
-/**Estilos al formulario**/
-.contenedor-form{
-    display: inline-block;
-    width: 80%;
-}
-
+/**NOTE: Estilos a los formulario**/
 label,
 input[type="text"],
 input[type="password"],

@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="<?=base_url?>recursos/css/piePagina.css">
     <link rel="stylesheet" href="<?=base_url?>recursos/css/productos.css">
     <link rel="stylesheet" href="<?=base_url?>recursos/css/usuarios.css">
+    <link rel="stylesheet" href="<?=base_url?>recursos/css/categorias.css">
 </head>
 
 <body>

@@ -1,0 +1,6 @@
+/*NOTE: Estilos para las categorias*/
+#categoria.crear, #categoria.listado{
+    width: 100%;
+    margin-top: 12px;
+    margin-right: 15px;
+}

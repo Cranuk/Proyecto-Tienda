@@ -1,14 +1,12 @@
-<!--NOTE: comprueba si la variable edicion esta seteada para saber si deber usar el formulario para editar o crear-->
-<?php if(isset($edicion) && isset($producto)):?>
-    <h1>Edicion del producto: <?=$producto['pros_nombre']?></h1>
-    <?php $url_accion = base_url.'producto/guardar&id='.$producto['id_producto'];?>
-<?php else:?>
-    <h1>Crear productos</h1>
-    <?php $url_accion = base_url.'producto/guardar';?>
-<?php endif;?>
+<section id="producto" class="crear">
+    <?php if(isset($edicion) && isset($producto)):?>
+        <h1>Edicion del producto: <?=$producto['pros_nombre']?></h1>
+        <?php $url_accion = base_url.'producto/guardar&id='.$producto['id_producto'];?>
+    <?php else:?>
+        <h1>Crear productos</h1>
+        <?php $url_accion = base_url.'producto/guardar';?>
+    <?php endif;?>
 
-
-<div class="contenedor-form">
     <form action="<?=$url_accion?>" method="post" enctype="multipart/form-data">
         <label for="categoria">Categoria:</label>
         <?php $categorias = Utilidades::mostrarCategorias(); ?>
@@ -39,4 +37,4 @@
 
         <input type="submit" value="Guardar producto">
     </form>
-</div>
+</section>

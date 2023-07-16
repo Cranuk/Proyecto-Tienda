@@ -1,9 +1,7 @@
                 </div>
         <!------------------ PIE DE PAGINA ------------------>
         <footer id="piePagina">
-            <p>
-                Desarrollado por Cranuk Web &copy; <?= date("Y") ?>
-            </p>
+            Desarrollado por Cranuk &copy; <?= date("Y") ?>
         </footer>
     </body>
 </html>

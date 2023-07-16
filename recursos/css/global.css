@@ -6,7 +6,7 @@
     font-family: 'Poppins', sans-serif;
     font-size: 16px;
     font-weight: 400;
-    color: #888888;
+    color: #333333;
 }
 
 body{
@@ -19,8 +19,7 @@ hr{
 
 h1{
     text-align: center;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-bottom: 20px;
 }
 
 a{
@@ -112,7 +111,7 @@ a:hover{
 
 .tabla{
     border: 1px solid #333333;
-    width: 80%;
+    width: 100%;
     text-align: center;
 }
 
