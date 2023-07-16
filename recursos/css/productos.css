@@ -1,11 +1,11 @@
 /*NOTE: Estilos a los productos de la web*/
-#producto.listado, #producto.crear{
+#producto.listado, #producto.crear, #producto.destacados{
     width: 100%;
     margin-top: 12px;
     margin-right: 15px;
 }
 
-.productos{
+.producto{
     width: 30%;
     border-right: 1px solid #e0dbdb;
     float: left;

@@ -32,7 +32,16 @@
                 <td><?=$producto['pros_nombre']?></td>
                 <td><?=$producto['pros_precio']?></td>
                 <td><?=$producto['pros_stock']?></td>
-                <td><?=$producto['pros_imagen']?></td>
+                <?php if ($producto['pros_imagen'] == null) : ?>
+                    <!--NOTE: comprobamos que tenga cargada una imagen, en caso que no tenga le ponemos una imagen default-->
+                    <td>
+                        <img src="<?= base_url ?>recursos/imagenes/camiseta.png" alt="imagen default">
+                    </td>
+                <?php else : ?>
+                    <td>
+                        <img src="<?= base_url ?>subidas/productos/<?= $producto['pros_imagen'] ?>" alt="imagen del producto">
+                    </td>
+                <?php endif; ?>
                 <td>
                     <!--NOTE: los botones creados al estar en un bucle les debemos asignar el id para saber a que producto en especifico deseamos eliminar o editar mediante parametro GET-->
                     <a href="<?=base_url?>producto/eliminar&id=<?=$producto['id_producto']?>" class="boton boton-rojo boton-herramienta">Eliminar</a>
