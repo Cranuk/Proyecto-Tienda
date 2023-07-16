@@ -57,4 +57,35 @@ class CategoriaModelo{
         }
         return $resultado;
     }
+
+    public function eliminar(){
+        $base = Conexion::conectar();
+        $categoria_id = $this -> getId();
+        $sql = "DELETE FROM categorias WHERE id_categoria = :categoria_id";
+        $consulta = $base -> prepare($sql);
+        $consulta -> bindParam(':categoria_id', $categoria_id);
+        $borro = $consulta -> execute();
+        $resultado = false;
+        if ($borro) {
+            $resultado = true;
+        }
+        return $resultado;
+    }
+
+    public function editar(){
+        $base = Conexion::conectar();
+        $categoria_id = $this -> getId();
+        $nombre = $this -> getNombre();
+        $sql = "UPDATE categorias SET caia_nombre = :nombre";
+        $sql .= " WHERE id_categoria = :categoria_id";
+        $consulta = $base -> prepare($sql);
+        $consulta -> bindParam(':categoria_id', $categoria_id);
+        $consulta -> bindParam(':nombre', $nombre);
+        $guardo = $consulta -> execute();
+        $resultado = false;
+        if ($guardo) {
+            $resultado = true;
+        }
+        return $resultado;
+    }
 }

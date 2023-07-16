@@ -96,7 +96,6 @@ class productoControlador{
             $_SESSION['borrado'] = 'error';
         }
         header('Location:'.base_url.'producto/listado');
-
     }
 
     public function editar(){
