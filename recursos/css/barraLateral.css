@@ -1,0 +1,37 @@
+/*NOTE: Estilos a la barra lateral**/
+#barraLateral{
+    width: 25%;
+    min-height: 500px;
+    margin-top: 15px;
+    margin-left: 15px;
+}
+
+#barraLateral .bloqueLateral{
+    width: 90%;
+}
+
+#barraLateral h3{
+    display: block;
+    color: #222222;
+    width: 100%;
+    text-align: center;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    background: #E1E1E1;
+    border-bottom: 2px solid #49BC8D;
+}
+
+#barraLateral ul{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#barraLateral ul li{
+    list-style: square;
+    margin-left: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}

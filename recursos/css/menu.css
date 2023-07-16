@@ -1,0 +1,36 @@
+/*NOTE: Estilos para el menu**/
+#menu{
+    clear: both;
+    background-color: #333333;
+    color: white;
+    height: 55px;
+    border-bottom: 4px solid #49BC8D;
+}
+
+#menu ul{
+    list-style: none;
+    margin: 0px auto;
+    margin-left: 45px;
+}
+
+#menu ul li{
+    line-height: 55px;
+    float: left;
+    border-right: 1px solid #49BC8D;
+}
+
+#menu a{
+    display: block;
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+    transition: all 300ms;
+}
+
+#menu a:first-child{
+    border-left: 1px solid #49BC8D;
+}
+
+#menu a:hover{
+    background-color: #49BC8D;
+}

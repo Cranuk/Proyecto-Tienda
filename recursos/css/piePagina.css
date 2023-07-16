@@ -1,0 +1,10 @@
+/*NOTE: Estilos al pie de pagina*/
+#piePagina{
+    clear: both;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: white;
+    background-color: #333333;
+    border-top: 5px solid #49BC8D;
+}

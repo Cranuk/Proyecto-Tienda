@@ -46,7 +46,7 @@ class usuarioControlador{
             $usuario->setCorreo($_POST['correo']);
             $usuario->setClave(md5($_POST['clave']));
             $identidad = $usuario->logeo(); //NOTE: guardamos el objeto en una variable
-            if ($identidad && is_object($identidad)) {
+            if ($identidad) {
                 //ANCHOR: Crear una sesion
                 $_SESSION['identidad'] = $identidad;
                 if ($identidad->rol == 'admin') {
