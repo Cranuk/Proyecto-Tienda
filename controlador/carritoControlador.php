@@ -39,10 +39,10 @@ class carritoControlador
             $producto = $dato->elegirProducto(); //NOTE: guardamos los datos de un producto en una variable
 
             //NOTE: agregar al carrito
-            if (is_object($producto)) {
+            if ($producto) {
                 $_SESSION['carrito'][] = array(
-                    'id_producto' => $producto->id_producto,
-                    'precio' => $producto->pros_precio,
+                    'id_producto' => $producto['id_producto'],
+                    'precio' => $producto['pros_precio'],
                     'cantidad' => 1,
                     'producto_datos' => $producto
                 );

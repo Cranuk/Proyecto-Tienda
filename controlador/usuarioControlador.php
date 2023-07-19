@@ -45,11 +45,11 @@ class usuarioControlador{
             $usuario = new UsuarioModelo();
             $usuario->setCorreo($_POST['correo']);
             $usuario->setClave(md5($_POST['clave']));
-            $identidad = $usuario->logeo(); //NOTE: guardamos el objeto en una variable
+            $identidad = $usuario->logeo();
             if ($identidad) {
                 //ANCHOR: Crear una sesion
                 $_SESSION['identidad'] = $identidad;
-                if ($identidad->rol == 'admin') {
+                if ($identidad['rol'] == 'admin') {
                     $_SESSION['admin'] = true;
                 }
             }else{

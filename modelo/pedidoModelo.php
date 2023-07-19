@@ -112,7 +112,7 @@ class PedidoModelo{
         $consulta -> bindParam(':pedido_id', $pedido_id);
         $consulta -> execute();
         $resultado = $consulta -> fetch(PDO::FETCH_ASSOC);
-        return $resultado; //NOTE: lo devolvemos como un objeto para utilizar sus datos
+        return $resultado;
     }
 
     public function pedidoUsuario(){
@@ -123,10 +123,10 @@ class PedidoModelo{
         $consulta -> bindParam(':usuario_id', $usuario_id);
         $consulta -> execute();
         $resultado =  $consulta -> fetch(PDO::FETCH_ASSOC);
-        return $resultado; //NOTE: lo devolvemos como un objeto para utilizar sus datos
+        return $resultado;
     }
 
-    public function productoUsuario($id){
+    public function pedidoProducto($id){
         $base = Conexion::conectar();
         $sql = "SELECT pr.*, lp.* FROM productos pr ";
         $sql .= "INNER JOIN lineaspedidos lp ON pr.id_producto = lp.producto_id ";
@@ -147,7 +147,7 @@ class PedidoModelo{
         $consulta -> bindParam(':id', $id);
         $consulta -> execute();
         $resultado = $consulta -> fetch(PDO::FETCH_ASSOC);
-        return $resultado; //NOTE: lo devolvemos como un objeto para utilizar sus datos
+        return $resultado;
     }
 
     public function listaPedidoUsuario(){
@@ -188,15 +188,15 @@ class PedidoModelo{
         $sql = "SELECT LAST_INSERT_ID() as pedido";
         $consulta = $base -> prepare($sql);
         $consulta -> execute();
-        $row = $consulta->fetch(PDO::FETCH_OBJ);
-        $pedido = $row->pedido;
+        $pedidos = $consulta->fetch(PDO::FETCH_ASSOC);
+        $cantPedidos = count($pedidos);
 
         foreach ($_SESSION['carrito'] as $carrito){
             $producto = $carrito['producto_datos'];
             $sql2 = "UPDATE productos SET pros_stock = pros_stock - :cantidad WHERE id_producto = :id_producto";
             $consulta2 = $base -> prepare($sql2);
             $consulta2 -> bindParam(':cantidad', $carrito['cantidad']);
-            $consulta -> bindParam(':producto_id', $producto->id_producto);
+            $consulta -> bindParam(':producto_id', $producto['id_producto']);
             $guardo = $consulta -> execute();
         }
         
@@ -212,15 +212,15 @@ class PedidoModelo{
         $sql = "SELECT LAST_INSERT_ID() as pedido";
         $consulta = $base -> prepare($sql);
         $consulta -> execute();
-        $row = $consulta->fetch(PDO::FETCH_OBJ);
-        $pedido = $row->pedido;
+        $pedidos = $consulta->fetch(PDO::FETCH_ASSOC);
+        $cantPedidos = count($pedidos);
 
         foreach ($_SESSION['carrito'] as $carrito){
             $producto = $carrito['producto_datos'];
-            $sql2 = "INSERT INTO lineaspedidos VALUES(NULL, :pedido, :id_producto, :cantidad)";
+            $sql2 = "INSERT INTO lineaspedidos VALUES(NULL, :id_pedido, :id_producto, :cantidad)";
             $consulta = $base -> prepare($sql2);
-            $consulta -> bindParam(':pedido', $pedido);
-            $consulta -> bindParam(':id_producto', $producto->id_producto);
+            $consulta->bindValue(':id_pedido', $pedidos, PDO::PARAM_INT);
+            $consulta -> bindParam(':id_producto', $producto['id_producto']);
             $consulta -> bindParam(':cantidad', $carrito['cantidad']);
             $guardo = $consulta -> execute();
         }

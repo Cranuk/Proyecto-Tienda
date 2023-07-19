@@ -1,5 +1,5 @@
 /*NOTE: Estilos a los productos de la web*/
-#producto.listado, #producto.crear, #producto.destacados{
+#producto.listado, #producto.crear, #producto.destacados, #producto.verProducto{
     width: 100%;
     margin-top: 12px;
     margin-right: 15px;

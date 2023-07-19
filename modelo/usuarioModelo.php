@@ -106,8 +106,8 @@ class UsuarioModelo{
         $duplicado = $consulta -> rowCount(); // NOTE: comprobamos que solo exista solo su perfil
 
         if ($existe && $duplicado == 1) {
-            $usuario = $consulta->fetch(PDO::FETCH_OBJ);
-            if ($clave === $usuario->usos_clave) { //NOTE: si esta todo en orden guardamos el objeto en una variable y retornamos los datos
+            $usuario = $consulta->fetch(PDO::FETCH_ASSOC);
+            if ($clave === $usuario['usos_clave']) { //NOTE: si esta todo en orden guardamos el objeto en una variable y retornamos los datos
                 $resultado = $usuario;
             }else{
                 $resultado = null;

@@ -25,7 +25,7 @@
                 <input type="submit" value="Enviar">
             </form>
         <?php else : ?>
-            <h3>Bienvenido, <b><?= $_SESSION['identidad']->usos_nombres ?></b></h3>
+            <h3>Bienvenido, <b><?= $_SESSION['identidad']['usos_nombres'] ?></b></h3>
         <?php endif; ?>
         <ul>
             <?php if (isset($_SESSION['admin'])) : ?>

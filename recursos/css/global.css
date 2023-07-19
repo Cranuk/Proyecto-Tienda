@@ -18,8 +18,19 @@ hr{
 }
 
 h1{
+    font-size: 24px;
     text-align: center;
-    padding-bottom: 20px;
+    letter-spacing: 1px;
+    border-bottom: 1px solid #e0dbdb;
+    margin-bottom: 20px;
+    padding: 20px;
+    padding-top: 0px;
+}
+
+h3{
+    font-size: 20px;
+    letter-spacing: 1px;
+    border-bottom: 1px solid #e0dbdb;
 }
 
 a{
@@ -50,23 +61,10 @@ a:hover{
 
 /**Estilos al contenido principal**/
 .vidriera{
-    width: 77%;
-    float: right;
     border-left: 1px solid #2a644c;
     box-shadow: -5px -1px 5px #49BC8D;
     padding: 20px;
     min-height: 500px;
-}
-
-.vidriera h1{
-    font-size: 30px;
-    font-weight: normal;
-    text-align: center;
-    letter-spacing: 1px;
-    border-bottom: 1px solid #e0dbdb;
-    margin-bottom: 20px;
-    padding: 20px;
-    padding-top: 0px;
 }
 
 .boton{
@@ -122,11 +120,6 @@ a:hover{
 
 .tabla img{
     height: 115px;
-}
-
-.miniatura{
-    width: 100px;
-    height: 100px;
 }
 
 .carrito-total{

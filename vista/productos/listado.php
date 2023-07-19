@@ -32,7 +32,7 @@
                 <td><?=$producto['pros_nombre']?></td>
                 <td><?=$producto['pros_precio']?></td>
                 <td><?=$producto['pros_stock']?></td>
-                <?php if ($producto['pros_imagen'] == null) : ?>
+                <?php if (is_null($producto['pros_imagen'])) : ?>
                     <!--NOTE: comprobamos que tenga cargada una imagen, en caso que no tenga le ponemos una imagen default-->
                     <td>
                         <img src="<?= base_url ?>recursos/imagenes/camiseta.png" alt="imagen default">

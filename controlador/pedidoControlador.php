@@ -13,7 +13,7 @@ class pedidoControlador
 
     public function confirmar(){ //NOTE: se confirma el pedido si esta registrado en la pagina
         if (isset($_SESSION['identidad'])) {
-            $usuario_id = $_SESSION['identidad']->id_usuario; //NOTE: tomamos el id del usuario logeado
+            $usuario_id = $_SESSION['identidad']['id_usuario']; //NOTE: tomamos el id del usuario logeado
             $direccion = isset($_POST['direccion']) ? $_POST['direccion'] : false;
             $localidad = isset($_POST['localidad']) ? $_POST['localidad'] : false;
             $provincia = isset($_POST['provincia']) ? $_POST['provincia'] : false;
@@ -50,20 +50,19 @@ class pedidoControlador
 
     public function pedidoConfirmado(){
         if (isset($_SESSION['identidad'])) {
-            $usuario_id = $_SESSION['identidad']->id_usuario; //NOTE: tomamos el id del usuario logeado
+            $usuario_id = $_SESSION['identidad']['id_usuario']; //NOTE: tomamos el id del usuario logeado
             $dato = new PedidoModelo();
             $dato->setUsuario_id($usuario_id);
-            $pedido = $dato->pedidoUsuario();
-
+            $pedidoUsuario = $dato->pedidoUsuario();
             $dato2 = new PedidoModelo();
-            $productos = $dato2->productoUsuario($pedido->id_pedido);
+            $productoUsuario = $dato2->pedidoProducto($pedidoUsuario['id_pedido']);
         }
         require_once 'vista/pedidos/confirmado.php';
     }
 
     public function misPedidos(){ //NOTE: nos dara los pedidos que tenga el usuario logeado
         Utilidades::logeado(); // NOTE: usamos el helper para comprobar si esta logeado
-        $usuario_id = $_SESSION['identidad']->id_usuario; //NOTE: tomamos el id del usuario logeado
+        $usuario_id = $_SESSION['identidad']['id_usuario']; //NOTE: tomamos el id del usuario logeado
         $dato = new PedidoModelo();
 
         //NOTE: sacamos los pedidos del usuario
@@ -86,7 +85,7 @@ class pedidoControlador
 
             // NOTE: Sacar los productos
             $dato2 = new PedidoModelo();
-            $productos = $dato2->productoUsuario($id);
+            $productos = $dato2->pedidoProducto($id);
 
             // NOTE: Sacamos los datos del usuario
             $dato3 = new PedidoModelo();
