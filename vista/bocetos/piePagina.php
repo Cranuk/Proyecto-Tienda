@@ -1,4 +1,4 @@
-                </div>
+        </section>
         <!------------------ PIE DE PAGINA ------------------>
         <footer id="piePagina">
             Desarrollado por Cranuk &copy; <?= date("Y") ?>

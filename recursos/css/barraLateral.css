@@ -1,25 +1,12 @@
 /*NOTE: Estilos a la barra lateral**/
 #barraLateral{
     width: 25%;
-    min-height: 500px;
-    margin-top: 15px;
-    margin-left: 15px;
-}
-
-#barraLateral .bloqueLateral{
-    width: 90%;
+    padding-top: 38px;
+    min-height: 77vh;
 }
 
 #barraLateral h3{
-    color: #888888;
-    width: 100%;
-    text-align: center;
-    padding-top: 2px;
-    padding-bottom: 2px;
-    margin-bottom: 15px;
-    font-size: 16px;
-    background: #E1E1E1;
-    border-bottom: 2px solid #49BC8D;
+    margin-left: 25px;
 }
 
 #barraLateral ul{

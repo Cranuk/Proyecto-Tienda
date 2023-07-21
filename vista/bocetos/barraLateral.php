@@ -1,7 +1,7 @@
 <aside id="barraLateral">
     <div id="carrito" class="bloqueLateral">
         <h3>Carrito de compras</h3>
-        <ul>
+        <ul class="paddingLR-10">
             <?php ob_start(); $carrito = Utilidades::estadisticasCarrito();?>
             <li>
                 <a href="<?= base_url ?>carrito/detalle" onclick="function; return false;">Cantidad(<?= $carrito['cantidad'] ?>)</a>
@@ -17,7 +17,7 @@
     <div id="logeo" class="bloqueLateral">
         <?php if (!isset($_SESSION['identidad'])) : ?>
             <h3>Entrar a la web</h3>
-            <form action="<?= base_url ?>usuario/logeo" method="post">
+            <form action="<?= base_url ?>usuario/logeo" method="post" class="paddingLR-10">
                 <label for="correo">Email</label>
                 <input type="email" name="correo">
                 <label for="clave">Contraseña</label>
@@ -27,7 +27,7 @@
         <?php else : ?>
             <h3>Bienvenido, <b><?= $_SESSION['identidad']['usos_nombres'] ?></b></h3>
         <?php endif; ?>
-        <ul>
+        <ul class="paddingLR-10">
             <?php if (isset($_SESSION['admin'])) : ?>
                 <!--ANCHOR: enlaces de administrador-->
                 <li>

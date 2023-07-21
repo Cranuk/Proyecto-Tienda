@@ -26,12 +26,12 @@
                     </td>
                     <td><?= $producto['pros_precio'] ?></td>
                     <td>
+                        <a href="<?= base_url ?>carrito/restar&indice=<?=$indice?>" class="boton"><b>-</b></a>
                         <?= $elemento['cantidad'] ?>
                         <a href="<?= base_url ?>carrito/sumar&indice=<?=$indice?>" class="boton"><b>+</b></a>
-                        <a href="<?= base_url ?>carrito/restar&indice=<?=$indice?>" class="boton"><b>-</b></a>
                     </td>
                     <td>
-                    <a href="<?= base_url ?>carrito/quitar&indice=<?=$indice?>" class="boton boton-rojo">Quitar del carrito</a>
+                    <a href="<?= base_url ?>carrito/quitar&indice=<?=$indice?>" class="boton boton-rojo boton-herramienta"><i class='bx bx-trash bx-sm'></i></a>
                     </td>
                 </tr>
             <?php endforeach; ?>
@@ -40,8 +40,8 @@
             <?php $estadisticas = Utilidades::estadisticasCarrito() ?>
             <h3>Precio Total: $<?= $estadisticas['total'] ?></h3>
             <br>
-            <a href="<?= base_url ?>pedido/realizar" class="boton boton-azul">Realizar pedido</a>
-            <a href="<?= base_url ?>carrito/eliminar" class="boton boton-rojo">Vaciar carrito</a>
+            <a href="<?= base_url ?>pedido/realizar" class="boton boton-azul boton-herramienta" title="Realizar pedido"><i class='bx bx-cart-download bx-sm'></i></a>
+            <a href="<?= base_url ?>carrito/eliminar" class="boton boton-rojo boton-herramienta" title="Vaciar carrito"><i class='bx bx-cart bx-sm'></i></a>
         </div>
     <?php else:?>
         <h1>No hay productos en tu carrito</h1>

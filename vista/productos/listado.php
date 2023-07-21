@@ -1,7 +1,7 @@
 <section id="producto" class="listado">
     <h1>Listado de productos</h1>
 
-    <a href="<?=base_url?>producto/crear" class="boton boton-chico">
+    <a href="<?=base_url?>producto/crear" class="boton">
         Crear producto
     </a>
 
@@ -44,8 +44,8 @@
                 <?php endif; ?>
                 <td>
                     <!--NOTE: los botones creados al estar en un bucle les debemos asignar el id para saber a que producto en especifico deseamos eliminar o editar mediante parametro GET-->
-                    <a href="<?=base_url?>producto/eliminar&id=<?=$producto['id_producto']?>" class="boton boton-rojo boton-herramienta">Eliminar</a>
-                    <a href="<?=base_url?>producto/editar&id=<?=$producto['id_producto']?>" class="boton boton-azul boton-herramienta">Editar</a>
+                    <a href="<?=base_url?>producto/editar&id=<?=$producto['id_producto']?>" class="boton boton-azul boton-herramienta"><i class='bx bx-edit bx-sm'></i></a>
+                    <a href="<?=base_url?>producto/eliminar&id=<?=$producto['id_producto']?>" class="boton boton-rojo boton-herramienta"><i class='bx bx-trash bx-sm'></i></a>
                 </td>
             </tr>
         <?php endforeach;?>

@@ -1,8 +1,10 @@
 /*NOTE: Estilos a los pedido de la web*/
 #pedido.carrito, #pedido.realizar, #pedido.listado, #pedido.confirmado, #pedido.detalle{
     width: 100%;
-    margin-top: 12px;
-    margin-right: 15px;
+    padding-top: 12px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-left: 2px solid #f1c47b;
 }
 
 #pedido.infoDetalle{
