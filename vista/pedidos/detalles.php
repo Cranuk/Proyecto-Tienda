@@ -4,8 +4,8 @@
     <?php if (isset($pedido)) : ?>
         <?php if (isset($_SESSION['admin'])) : ?>
             <!--NOTE: si tiene el rol de administrador podra cambiar el estado del pedido-->
-            <h3>Cambio de estado del pedido:</h3>
-            <form action="<?= base_url ?>pedido/cambiarEstado" class="producto-estado" method="post">
+            <h3 class="sin-borde">Cambio de estado del pedido:</h3>
+            <form action="<?= base_url ?>pedido/cambiarEstado" method="post">
                 <input type="hidden" value="<?= $pedido['id_pedido'] ?>" name="pedido_id">
                 <select name="estado">
                     <option value="pendiente" <?= $pedido['peos_estado'] == "pendiente" ? "selected" : "" ?>>Pendiente</option>

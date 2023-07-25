@@ -1,6 +1,6 @@
 <section id="pedido" class="confirmado">
     <?php if (isset($_SESSION['pedido']) && $_SESSION['pedido'] == 'finalizado') : ?>
-        <h1>Pedido Confirmado</h1>
+        <h1 class="sin-borde">Pedido Confirmado</h1>
         <p>
             Su pedido se ha confirmado correctamente, una vez realizado el pago se pondra en proceso de envio.
         </p>

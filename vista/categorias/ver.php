@@ -1,8 +1,8 @@
 <div id="categoria" class="productos vidriera">
     <?php if (isset($categoria)) : ?>
-        <h1>Productos con la categoria <?= $categoria['caia_nombre'] ?></h1>
+        <h1 class="sin-borde">Productos con la categoria <?= $categoria['caia_nombre'] ?></h1>
     <?php else : ?>
-        <h1>La categoria no existe</h1>
+        <h1 class="sin-borde">La categoria no existe</h1>
     <?php endif; ?>
     <?php if (empty($productos)) : ?>
         <h2>Categoria sin productos</h2>

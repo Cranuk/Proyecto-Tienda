@@ -1,9 +1,9 @@
 <section id="categoria" class="crear">
     <?php if(isset($edicion) && isset($categoria)):?>
-        <h1>Edicion de la categoria: <?=$categoria['caia_nombre']?></h1>
+        <h1 class="sin-borde">Edicion de la categoria: <?=$categoria['caia_nombre']?></h1>
         <?php $url_accion = base_url.'categoria/guardar&id='.$categoria['id_categoria'];?>
     <?php else:?>
-        <h1>Crear categoria</h1>
+        <h1 class="sin-borde">Crear categoria</h1>
         <?php $url_accion = base_url.'categoria/guardar';?>
     <?php endif;?>
     <form action="<?=$url_accion?>" method="POST">

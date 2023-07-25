@@ -1,8 +1,8 @@
 <section id="producto" class="verProducto">
     <?php if (isset($producto)) : ?>
-        <h1><?= $producto['pros_nombre'] ?></h1>
+        <h1 class="sin-borde"><?= $producto['pros_nombre'] ?></h1>
     <?php else : ?>
-        <h1>El producto no existe</h1>
+        <h1 class="sin-borde">El producto no existe</h1>
     <?php endif; ?>
     <div class="producto-detalle">
         <?php if (is_null($producto['pros_imagen'])) : ?>

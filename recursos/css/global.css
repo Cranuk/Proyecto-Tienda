@@ -51,6 +51,10 @@ b{
     font-size: 20px;
 }
 
+.sin-borde{
+    border: none;
+}
+
 #web{
     display: flex;
     flex-direction: column;
@@ -63,7 +67,6 @@ b{
     flex-direction: row;
 }
 
-/**Estilos al contenido principal**/
 .vidriera{
     border-left: 2px solid #f1c47b;
 }
@@ -72,13 +75,25 @@ b{
     display: inline-block;
     border-radius: 4px;
     width: auto;
-    padding: 5px;
+    padding: 3px 5px 3px 5px;;
     cursor: pointer;
 }
 
 .boton-herramienta:hover{
     background-color: #f1c47b;
     transition: all 0.5s ease-out;
+}
+
+.boton-posicion{
+    position: absolute;
+    top: 2%;
+    left: 20%;
+}
+
+.boton-posicion2{
+    position: absolute;
+    top: 2%;
+    left: 23%;
 }
 
 .boton-rojo{
@@ -93,27 +108,16 @@ b{
     background: #ff5400;
 }
 
+.boton-verde{
+    background: #0ead69;
+}
+
 .alerta_verde{
     color: #0ead69;
 }
 
 .alerta_roja{
     color: #ef233c;
-}
-
-.tabla{
-    border: 1px solid #32373b;
-    width: 100%;
-    text-align: center;
-}
-
-.tabla td{
-    padding: 5px;
-    border-top: 1px solid #32373b;
-}
-
-.tabla img{
-    height: 115px;
 }
 
 .carrito-total{
@@ -130,4 +134,35 @@ b{
 .paddingLR-10{
     padding-left: 10px;
     padding-right: 10px;
+}
+
+/* Estilos para toda la tabla */
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table img{
+    height: 50px;
+}
+
+th {
+    background-color: #e6a340; /* Color de fondo del encabezado */
+    border: 1px solid #000000; /* Borde del encabezado */
+    padding: 8px;
+    text-align: left;
+}
+
+tr:nth-child(odd) {
+    background-color: #ffcb78; /* Color de fondo para filas impares */
+}
+
+tr:nth-child(even) {
+    background-color: #ffe8c4; /* Color de fondo para filas pares */
+}
+
+td {
+    border: 1px solid #000000; /* Borde de las celdas de datos */
+    padding: 8px;
+    text-align: left;
 }

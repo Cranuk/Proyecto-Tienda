@@ -1,5 +1,5 @@
 <section id="producto" class="destacados vidriera">
-    <h1>Nuestros Productos</h1>
+    <h1 class="sin-borde">Nuestros Productos</h1>
     <?php if (empty($destacados)) : ?>
         <h2>Destacados sin productos</h2>
     <?php else:?>

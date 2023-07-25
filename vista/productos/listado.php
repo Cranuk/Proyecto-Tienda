@@ -1,8 +1,8 @@
 <section id="producto" class="listado">
-    <h1>Listado de productos</h1>
+    <h1 class="sin-borde">Listado de productos</h1>
 
-    <a href="<?=base_url?>producto/crear" class="boton">
-        Crear producto
+    <a href="<?=base_url?>producto/crear" class="boton boton-verde boton-herramienta boton-posicion" title="Crear producto">
+        <i class='bx bx-list-plus bx-sm'></i>
     </a>
 
     <?php if (isset($_SESSION['producto']) && $_SESSION['producto'] == 'guardado'):?>
@@ -17,7 +17,7 @@
         <strong class="alerta_roja">ERROR al eliminar el producto</strong>
     <?php endif;?>
     <?php Utilidades::borrarSesion('borrado');?>
-    <table class="tabla">
+    <table>
         <tr>
             <th>Id</th>
             <th>Nombre</th>

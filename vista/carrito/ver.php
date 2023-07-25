@@ -1,6 +1,8 @@
 <section id="pedido" class="carrito">
     <?php if (isset($carrito) && count($carrito) >= 1) : ?>
-        <h1>Detalle de la compra</h1>
+        <h1 class="sin-borde">Detalle de la compra</h1>
+        <a href="<?= base_url ?>pedido/realizar" class="boton boton-azul boton-herramienta boton-posicion" title="Realizar pedido"><i class='bx bx-cart-download bx-sm'></i></a>
+        <a href="<?= base_url ?>carrito/eliminar" class="boton boton-rojo boton-herramienta boton-posicion2" title="Vaciar carrito"><i class='bx bx-cart bx-sm'></i></a>
         <table class="tabla">
             <tr>
                 <th>Imagen</th>
@@ -38,12 +40,9 @@
         </table>
         <div class="carrito-total">
             <?php $estadisticas = Utilidades::estadisticasCarrito() ?>
-            <h3>Precio Total: $<?= $estadisticas['total'] ?></h3>
-            <br>
-            <a href="<?= base_url ?>pedido/realizar" class="boton boton-azul boton-herramienta" title="Realizar pedido"><i class='bx bx-cart-download bx-sm'></i></a>
-            <a href="<?= base_url ?>carrito/eliminar" class="boton boton-rojo boton-herramienta" title="Vaciar carrito"><i class='bx bx-cart bx-sm'></i></a>
+            <h3 class="sin-borde">Precio Total: $<?= $estadisticas['total'] ?></h3>
         </div>
     <?php else:?>
-        <h1>No hay productos en tu carrito</h1>
+        <h1 class="sin-borde">No hay productos en tu carrito</h1>
     <?php endif; ?>
 </section>

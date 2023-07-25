@@ -1,6 +1,6 @@
 <section id="pedido" class="realizar">
     <?php if (isset($_SESSION['identidad'])) : ?>
-        <h1>Confirmar el pedido</h1>
+        <h1 class="sin-borde">Confirmar el pedido</h1>
         <p class="ver-carrito">
             <a href="<?= base_url ?>carrito/detalle">Ver carrito</a>
         </p>

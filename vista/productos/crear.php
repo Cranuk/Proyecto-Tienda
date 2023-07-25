@@ -1,9 +1,9 @@
 <section id="producto" class="crear">
     <?php if(isset($edicion) && isset($producto)):?>
-        <h1>Edicion del producto: <?=$producto['pros_nombre']?></h1>
+        <h1 class="sin-borde">Edicion del producto: <?=$producto['pros_nombre']?></h1>
         <?php $url_accion = base_url.'producto/guardar&id='.$producto['id_producto'];?>
     <?php else:?>
-        <h1>Crear productos</h1>
+        <h1 class="sin-borde">Crear productos</h1>
         <?php $url_accion = base_url.'producto/guardar';?>
     <?php endif;?>
 

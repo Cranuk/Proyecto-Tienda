@@ -1,8 +1,8 @@
 <section id="categoria" class="listado">
-    <h1>Listado de categorias</h1>
+    <h1 class="sin-borde">Listado de categorias</h1>
 
-    <a href="<?=base_url?>categoria/crear" class="boton" title="Agregar categoria">
-        Crear categoria
+    <a href="<?=base_url?>categoria/crear" class="boton boton-verde boton-herramienta boton-posicion" title="Agregar categoria">
+        <i class='bx bx-add-to-queue bx-sm'></i>
     </a>
 
     <?php if (isset($_SESSION['categoria']) && $_SESSION['categoria'] == 'guardado'):?>

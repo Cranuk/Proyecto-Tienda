@@ -1,5 +1,5 @@
 <section id="pedido" class="listado">
-    <h1>Mis pedidos</h1>
+    <h1 class="sin-borde">Mis pedidos</h1>
     <?php if (empty($pedidos)):?>
         <h2>No hay pedidos</h2>
     <?php else:?>
