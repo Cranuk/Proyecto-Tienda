@@ -1,35 +1,34 @@
 /*NOTE: Estilos para el menu**/
 #menu{
-    clear: both;
     background-color: #000000;
-    height: 55px;
     border-bottom: 4px solid #fca311;
 }
 
 #menu ul{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
     list-style: none;
-    margin: 0px auto;
-    margin-left: 45px;
+    margin-left: 10px;
 }
 
 #menu ul li{
-    line-height: 55px;
-    float: left;
     border-right: 1px solid #fca311;
-}
-
-#menu a{
-    display: block;
-    color: #e5e5e5;
-    padding-left: 20px;
-    padding-right: 20px;
     transition: all 300ms;
+    display: flex;
+    align-items: center;
 }
 
-#menu a:first-child{
-    border-left: 1px solid #fca311;
+#menu li a{
+    color: #e5e5e5;
+    padding:15px;
 }
 
-#menu a:hover{
+#menu li:hover{
     background-color: #fca311;
+    color: #32373b;
+}
+
+#menu li:hover i, #menu li:hover a{
+    color: #32373b;
 }

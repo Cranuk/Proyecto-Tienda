@@ -1,19 +1,4 @@
 <aside id="barraLateral">
-    <div id="carrito" class="bloqueLateral">
-        <h3>Carrito de compras</h3>
-        <ul class="paddingLR-10">
-            <?php ob_start(); $carrito = Utilidades::estadisticasCarrito();?>
-            <li>
-                <a href="<?= base_url ?>carrito/detalle" onclick="function; return false;">Cantidad(<?= $carrito['cantidad'] ?>)</a>
-            </li>
-            <li>
-                <a href="<?= base_url ?>carrito/detalle" onclick="function; return false;">Total a pagar: $ <?= $carrito['total'] ?></a>
-            </li>
-            <li>
-                <a href="<?= base_url ?>carrito/detalle">Ver mi carrito</a>
-            </li>
-        </ul>
-    </div>
     <div id="logeo" class="bloqueLateral">
         <?php if (!isset($_SESSION['identidad'])) : ?>
             <h3>Entrar a la web</h3>

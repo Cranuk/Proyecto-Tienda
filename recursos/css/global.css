@@ -51,6 +51,14 @@ b{
     font-size: 20px;
 }
 
+.posicionA{
+    position: absolute;
+}
+
+.posicionR{
+    position: relative;
+}
+
 .sin-borde{
     border: none;
 }
@@ -112,23 +120,26 @@ b{
     background: #0ead69;
 }
 
-.alerta_verde{
+.alerta-verde{
     color: #0ead69;
 }
 
-.alerta_roja{
+.alerta-roja{
     color: #ef233c;
 }
 
-.carrito-total{
-    display: inline-block;
-    margin-top: 30px;
-    margin-right: 30px;
-}
-
-.ver-carrito{
-    margin-top: 10px;
-    margin-bottom: 10px;
+.redondo-rojo-carrito{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    padding: 5px;
+    font-size: 12px;
+    height: 14px;
+    border-radius: 50%;
+    background-color: #ef233c;
+    color: #e5e5e5;
 }
 
 .paddingLR-10{

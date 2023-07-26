@@ -38,6 +38,17 @@
         <nav id="menu">
         <?php $categorias = Utilidades::mostrarCategorias(); //NOTE: usamos el helper para mostrar las categorias en el menu?>
             <ul>
+                <li class="posicionR">
+                    <?php ob_start(); $carrito = Utilidades::estadisticasCarrito();?>
+                    <a href="<?= base_url ?>carrito/detalle" title="Ir al carrito">
+                        <i class='bx bx-cart bx-sm'></i>
+                        <?php if (isset($_SESSION['identidad'])) : ?>
+                            <div class="redondo-rojo-carrito">
+                                <?= $carrito['cantidad'] ?>
+                            </div>
+                        <?php endif;?>
+                    </a>
+                </li>
                 <li>
                     <a href="<?=base_url?>">Inicio</a>
                 </li>
