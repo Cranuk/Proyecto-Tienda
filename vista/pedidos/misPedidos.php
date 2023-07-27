@@ -17,7 +17,7 @@
                     <td><?= $pedidos['peos_fecha'] ?></td>
                     <td><?= Utilidades::estadoPedido($pedidos['peos_estado']) ?></td>
                     <td>
-                        <a href="<?= base_url ?>pedido/detallePedido&id=<?= $pedidos['id_pedido'] ?>" class="boton boton-naranja boton-herramienta"><i class='bx bx-link-external'></i></a>
+                        <a href="<?= base_url ?>pedido/detallePedido&id=<?= $pedidos['id_pedido'] ?>" class="boton boton-naranja boton-herramienta" title="Ir a detalles"><i class='bx bx-link-external bx-sm'></i></a>
                     </td>
                 </tr>
         </table>

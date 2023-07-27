@@ -15,7 +15,7 @@
             <p><?= $producto['pros_nombre'] ?></p>
             <p><?= $producto['pros_descripcion'] ?></p>
             <p>$<?= $producto['pros_precio'] ?></p>
-            <a href="<?=base_url?>carrito/agregar&id=<?=$producto['id_producto']?>" class="boton">Comprar</a>
+            <a href="<?=base_url?>carrito/agregar&id=<?=$producto['id_producto']?>" class="boton boton-herramienta boton-azul">Comprar</a>
         </div>
     </div>
 </section>

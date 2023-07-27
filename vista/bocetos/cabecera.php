@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="<?=base_url?>recursos/css/usuarios.css">
     <link rel="stylesheet" href="<?=base_url?>recursos/css/categorias.css">
     <link rel="stylesheet" href="<?=base_url?>recursos/css/pedidos.css">
+    <link rel="stylesheet" href="@sweetalert2/themes/dark/dark.css">
 </head>
 
 <body>

@@ -40,7 +40,7 @@
         </table>
         <div class="carrito-total">
             <?php $estadisticas = Utilidades::estadisticasCarrito() ?>
-            <h3 class="sin-borde">Precio Total: $<?= $estadisticas['total'] ?></h3>
+            <h3 class="sin-borde sin-margin">Precio Total: $<?= $estadisticas['total'] ?></h3>
         </div>
     <?php else:?>
         <h1 class="sin-borde">No hay productos en tu carrito</h1>

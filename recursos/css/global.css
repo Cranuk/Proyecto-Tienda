@@ -63,6 +63,10 @@ b{
     border: none;
 }
 
+.sin-margin{
+    margin: 0px;
+}
+
 #web{
     display: flex;
     flex-direction: column;
@@ -85,10 +89,12 @@ b{
     width: auto;
     padding: 3px 5px 3px 5px;;
     cursor: pointer;
+    color: #e5e5e5;
 }
 
 .boton-herramienta:hover{
     background-color: #f1c47b;
+    color: #32373b;
     transition: all 0.5s ease-out;
 }
 
