@@ -42,7 +42,6 @@ class categoriaControlador{
             $dato = new CategoriaModelo();
             $dato->setId($id);
             $categoria = $dato->verCategoria();
-
             require_once 'vista/categorias/crear.php';//NOTE: nos redirige a esta pagina
         }else{
             header('Location:'.base_url.'categoria/listado');
@@ -57,23 +56,14 @@ class categoriaControlador{
             $categoria->setNombre($_POST['nombre']);
 
             //NOTE: si se esta editando la categoria
-            if (isset($_GET['id'])) {
+            if (isset($_GET['id']) && $_GET['id'] != 0) {
                 $id = $_GET['id'];
                 $categoria->setId($id);
-                $guardado = $categoria->editar(); 
+                $categoria->editar(); 
             }else{
-                $guardado = $categoria->guardar();
+                $categoria->guardar();
             }
-
-            if($guardado){
-                $_SESSION['categoria'] = 'guardado';
-            }else{
-                $_SESSION['categoria'] = 'error';
-            }
-        }else{
-            $_SESSION['categoria'] = 'error';
-        }
-        
+        }        
         header('Location:'.base_url.'categoria/listado');
     }
 
@@ -83,13 +73,7 @@ class categoriaControlador{
             $id = $_GET['id'];
             $categoria = new CategoriaModelo();
             $categoria->setId($id);
-            $borrado = $categoria->eliminar();
-
-            if ($borrado) {
-                $_SESSION['borrado'] = 'finalizado';
-            }else{
-                $_SESSION['borrado'] = 'error';
-            }
+            $categoria->eliminar();
         }else{
             $_SESSION['borrado'] = 'error';
         }

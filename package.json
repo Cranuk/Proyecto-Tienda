@@ -1,7 +1,5 @@
 {
   "dependencies": {
-    "@sweetalert2/theme-dark": "^5.0.15",
-    "boxicons": "^2.1.4",
-    "sweetalert2": "^11.7.20"
+    "boxicons": "^2.1.4"
   }
 }

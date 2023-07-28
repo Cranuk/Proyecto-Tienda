@@ -57,24 +57,14 @@ class productoControlador{
                     }
                 }
 
-                if (isset($_GET['id'])) {
+                if (isset($_GET['id']) && $_GET['id'] != 0) {
                     $id = $_GET['id'];
                     $producto->setId($id);
-                    $guardado = $producto->editar(); 
+                    $producto->editar(); 
                 }else{
-                    $guardado = $producto->guardar();
+                    $producto->guardar();
                 }
-
-                if ($guardado) {
-                    $_SESSION['producto'] = 'guardado';
-                }else{
-                    $_SESSION['producto'] = 'error';
-                }
-            }else{
-                $_SESSION['producto'] = 'error';
             }
-        }else{
-            $_SESSION['producto'] = 'error';
         }
         header('Location:'.base_url.'producto/listado');
     }
@@ -85,15 +75,7 @@ class productoControlador{
             $id = $_GET['id'];
             $producto = new ProductoModelo();
             $producto->setId($id);
-            $borrado = $producto->eliminar();
-
-            if ($borrado) {
-                $_SESSION['borrado'] = 'finalizado';
-            }else{
-                $_SESSION['borrado'] = 'error';
-            }
-        }else{
-            $_SESSION['borrado'] = 'error';
+            $producto->eliminar();
         }
         header('Location:'.base_url.'producto/listado');
     }

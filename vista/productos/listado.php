@@ -4,18 +4,7 @@
     <a href="<?=base_url?>producto/crear" class="boton boton-verde boton-herramienta boton-posicion" title="Crear producto">
         <i class='bx bx-list-plus bx-sm'></i>
     </a>
-
-    <?php if (isset($_SESSION['producto']) && $_SESSION['producto'] == 'guardado'):?>
-        <strong class="alerta_verde">Producto GUARDADO</strong>
-    <?php elseif (isset($_SESSION['producto']) && $_SESSION['producto'] != 'guardado'):?>
-        <strong class="alerta_roja">ERROR al guardar el producto</strong>
-    <?php endif;?>
-    <?php Utilidades::borrarSesion('producto');?>
-    <?php if (isset($_SESSION['borrado']) && $_SESSION['borrado'] == 'finalizado'):?>
-        <strong class="alerta_verde">Producto ELIMINADO</strong>
-    <?php elseif (isset($_SESSION['borrado']) && $_SESSION['borrado'] != 'finalizado'):?>
-        <strong class="alerta_roja">ERROR al eliminar el producto</strong>
-    <?php endif;?>
+    
     <?php Utilidades::borrarSesion('borrado');?>
     <table>
         <tr>
@@ -45,7 +34,7 @@
                 <td>
                     <!--NOTE: los botones creados al estar en un bucle les debemos asignar el id para saber a que producto en especifico deseamos eliminar o editar mediante parametro GET-->
                     <a href="<?=base_url?>producto/editar&id=<?=$producto['id_producto']?>" class="boton boton-azul boton-herramienta"><i class='bx bx-edit bx-sm'></i></a>
-                    <a href="<?=base_url?>producto/eliminar&id=<?=$producto['id_producto']?>" class="boton boton-rojo boton-herramienta"><i class='bx bx-trash bx-sm'></i></a>
+                    <a onclick="alerta_eliminar(<?=$producto['id_producto']?>, 2)" class="boton boton-rojo boton-herramienta"><i class='bx bx-trash bx-sm'></i></a>
                 </td>
             </tr>
         <?php endforeach;?>
