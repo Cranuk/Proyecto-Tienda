@@ -12,10 +12,10 @@
                 <div class="textoMensaje">
                     <?=$textoError?>
                 </div>
+                <div class="errorBoton">
+                    <a href=<?=base_url?> class="boton boton-azul boton-herramienta">Ir al inicio</a>
+                </div>
             <?php endif;?>
-        </div>
-        <div class="errorBoton">
-            <a href=<?=base_url?> class="boton boton-azul boton-herramienta">Ir al inicio</a>
         </div>
     </div>
 </section>

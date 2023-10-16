@@ -97,7 +97,10 @@ class ProductoModelo{
     //ANCHOR: otras funciones
     public function mostrarProductos(){
         $base = Conexion::conectar();
-        $sql = "SELECT * FROM productos ORDER BY id_producto DESC";
+        $sql = "SELECT p.*, c.caia_nombre AS nomCategoria FROM productos AS p 
+                INNER JOIN categorias AS c
+                ON p.categoria_id = c.id_categoria
+                ORDER BY id_producto DESC";
         $consulta = $base->prepare($sql);
         $resultado = $consulta->execute();
         $resultado = $consulta->fetchAll(PDO::FETCH_ASSOC);

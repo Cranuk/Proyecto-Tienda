@@ -29,8 +29,9 @@ class CategoriaModelo{
         $base = Conexion::conectar();
         $sql = "SELECT * FROM categorias ORDER BY id_categoria DESC";
         $consulta = $base -> prepare($sql);
-        $consulta -> execute();
-        return $consulta;
+        $resultado = $consulta->execute();
+        $resultado = $consulta->fetchAll(PDO::FETCH_ASSOC);
+        return $resultado;
     }
 
     public function verCategoria(){

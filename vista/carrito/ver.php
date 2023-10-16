@@ -43,6 +43,9 @@
             <h3 class="sin-borde sin-margin">Precio Total: $<?= $estadisticas['total'] ?></h3>
         </div>
     <?php else:?>
-        <h1 class="sin-borde">No hay productos en tu carrito</h1>
+        <?php 
+            $error = new errorControlador();
+            $error -> errorMensaje('productos en el carrito'); 
+        ?>
     <?php endif; ?>
 </section>
