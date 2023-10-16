@@ -1,8 +1,11 @@
-<section id="pedido" class="listado">
-    <h1 class="sin-borde">Mis pedidos</h1>
-    <?php if (empty($pedidos)):?>
-        <h2>No hay pedidos</h2>
-    <?php else:?>
+<?php if (empty($pedidos)):?>
+    <?php 
+        $error = new errorControlador();
+        $error -> errorMensaje('pedidos'); 
+    ?>
+<?php else:?>
+    <section id="pedido" class="listado">
+        <h1 class="sin-borde">Mis pedidos</h1>
         <table class="tabla">
             <tr>
                 <th>Numero del pedido</th>
@@ -21,6 +24,7 @@
                     </td>
                 </tr>
         </table>
-    <?php endif;?>
-</section>
+    </section>
+<?php endif;?>
+
 

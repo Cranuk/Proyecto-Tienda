@@ -1,8 +1,15 @@
 <?php
 
 class errorControlador{
-
-    public function mensaje(){
-        echo '<h1>La pagina que busca no existe</h1><hr>';
+    public function errorMensaje($contenido=''){
+        if(!empty($contenido)){
+            $bandera = true;
+            $textoError = 'No hay '.$contenido.' registrados';
+            require_once 'vista/bocetos/error.php';
+        }else{
+            $bandera = false;
+            $textoError = 'La pagina que buscas no existe';
+            require_once 'vista/bocetos/error.php';
+        }
     }
 }

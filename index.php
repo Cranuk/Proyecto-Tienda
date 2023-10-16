@@ -12,7 +12,7 @@ require_once 'vista/bocetos/barraLateral.php'; //NOTE: Solicitamos el archivo pa
 function mostrar_error(){
 	//NOTE: usamos el controlador error para mandar el mensaje de error
 	$error = new errorControlador();
-	$error -> mensaje();
+	$error -> errorMensaje();
 }
 
 if(isset($_GET['controlador'])){

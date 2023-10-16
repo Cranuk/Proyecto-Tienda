@@ -1,1 +1,1 @@
-const baseUrl = "http://mis-proyectos/MisProgramas/WebStore/";
+const baseUrl = "http://misproyectos/MisProgramas/WebStore/";

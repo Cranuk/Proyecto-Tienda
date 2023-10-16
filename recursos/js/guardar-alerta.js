@@ -1,3 +1,75 @@
+function alerta_usuario(){
+    event.preventDefault();
+    let nombre = document.querySelector('#nombre').value;
+    let apellido = document.querySelector('#apellido').value;
+    let correo = document.querySelector('#correo').value;
+    let clave = document.querySelector('#clave').value;
+    Swal.fire({
+        title: 'Confirmar tus datos',
+        text: "Desea guardar los datos ingresados?",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonText: 'Cancelar',
+        confirmButtonText: 'Si'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                guardar_usuario(nombre, apellido, correo, clave);
+            }
+        });
+}
+
+function guardar_usuario(nombre, apellido, correo, clave) {
+    let direccion;
+    direccion = 'usuario/guardar';
+
+    const formData = new FormData();
+    formData.append('nombre', nombre);
+    formData.append('apellido', apellido);
+    formData.append('correo', correo);
+    formData.append('clave', clave);
+
+    $.ajax({
+        url: baseUrl + direccion,
+        type: "POST",
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function (response) {
+            console.log(response);
+            if (response['status'] === "duplicado") {
+                Swal.fire(
+                    'Error',
+                    'El correo ya está en uso',
+                    'error'
+                );
+            } else if (response['status'] === "registrado") {
+                Swal.fire(
+                    'Acción exitosa',
+                    'El usuario ha sido registrado',
+                    'success'
+                ).then(() => {
+                    location.reload();
+                });
+            } else {
+                Swal.fire(
+                    'Error',
+                    'Hubo un problema al procesar la solicitud',
+                    'error'
+                );
+            }
+        },
+        error: function () {
+            Swal.fire(
+                'Error',
+                'Hubo un problema al procesar la solicitud',
+                'error'
+            );
+        }
+    });
+}
+
 // TODO: id = 0 crea nueva categoria / id > 0 editar una categoria
 function alerta_categoria(id){
     event.preventDefault();
@@ -54,7 +126,7 @@ function alerta_producto(id){
     let stock = document.querySelector('#stock').value;
     let imagen = document.querySelector('#imagen').value;
     Swal.fire({
-        title: 'Guardar la categoria?',
+        title: 'Guardar el producto?',
         text: "Desea guardar los datos ingresados?",
         icon: 'question',
         showCancelButton: true,

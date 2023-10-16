@@ -81,18 +81,31 @@ class UsuarioModelo{
         $apellido = $this -> getApellido();
         $correo = $this -> getCorreo();
         $clave = $this -> getClave();
-        $sql = "INSERT INTO usuarios VALUES (NULL, :nombre, :apellido, :correo, :clave, NULL, 'usuario')";
-        $consulta = $base -> prepare($sql);
-        $consulta -> bindParam(':nombre', $nombre);
-        $consulta -> bindParam(':apellido', $apellido);
-        $consulta -> bindParam(':correo', $correo);
-        $consulta -> bindParam(':clave', $clave);
-        $guardo = $consulta -> execute();
-        $resultado = false;
-        if ($guardo) {
-            $resultado = true;
+        
+        $sql_check = "SELECT COUNT(*) FROM usuarios WHERE usos_correo = :correo";
+        $consulta_check = $base->prepare($sql_check);
+        $consulta_check->bindParam(':correo', $correo);
+        $consulta_check->execute();
+        $correo_existente = (int)$consulta_check->fetchColumn();
+        $response = [];
+        if ($correo_existente > 0) { //ANCHOR: Verificar si el correo ya existe en la base de datos
+            $response = ['status' => 'duplicado'];
+        }else{
+            $sql = "INSERT INTO usuarios VALUES (NULL, :nombre, :apellido, :correo, :clave, NULL, 'usuario')";
+            $consulta = $base -> prepare($sql);
+            $consulta -> bindParam(':nombre', $nombre);
+            $consulta -> bindParam(':apellido', $apellido);
+            $consulta -> bindParam(':correo', $correo);
+            $consulta -> bindParam(':clave', $clave);
+            $guardo = $consulta -> execute();
+            if ($guardo) {
+                $response = ['status' => 'registrado'];
+            }else{
+                $response = ['status' => 'error'];
+            }
+            header('Content-Type: application/json');
+            echo json_encode($response);
         }
-        return $resultado;
     }
 
     public function logeo(){

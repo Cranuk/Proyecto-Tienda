@@ -37,7 +37,7 @@ i{
 }
 
 i:hover{
-    color: #32373b;
+    color: #f1faee;
 }
 
 a{
@@ -93,8 +93,8 @@ b{
 }
 
 .boton-herramienta:hover{
-    background-color: #f1c47b;
-    color: #32373b;
+    background-color: #32373b;
+    color: #e5e5e5;
     transition: all 0.5s ease-out;
 }
 
@@ -151,6 +151,10 @@ b{
 .paddingLR-10{
     padding-left: 10px;
     padding-right: 10px;
+}
+
+.bx-logoGrande{
+    font-size: 8rem;
 }
 
 /* Estilos para toda la tabla */

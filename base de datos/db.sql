@@ -1,5 +1,5 @@
-CREATE DATABASE tienda_master;
-USE tienda_master;
+CREATE DATABASE base_tienda;
+USE base_tienda;
 
 CREATE TABLE usuarios(
     id_usuario      int(255) auto_increment not null,
@@ -12,8 +12,6 @@ CREATE TABLE usuarios(
     CONSTRAINT pk_usuario PRIMARY KEY(id_usuario),
     CONSTRAINT uq_email UNIQUE (usos_correo)
 ) ENGINE=InnoDb;
-
-INSERT INTO usuarios VALUES(NULL, "admin", "admin", "admin@admin", "1234", NULL, "admin");
 
 CREATE TABLE categorias(
     id_categoria    int(255) AUTO_INCREMENT not null,

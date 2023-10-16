@@ -6,7 +6,7 @@ define('usuario','root');
 define('clave','');
 
 //ANCHOR: aqui vamos a declarar variables constantes para uso interno del programa
-define('base_url', 'http://mis-proyectos/MisProgramas/WebStore/');
+define('base_url', 'http://misproyectos/MisProgramas/WebStore/');
 define('controlador_default', 'producto');
 define('accion_default','destacado');
 

@@ -22,20 +22,10 @@ class usuarioControlador{
                 $usuario->setApellido($apellido);
                 $usuario->setCorreo($correo);
                 $usuario->setClave(md5($clave));
-                $guardado = $usuario->guardar();
-
-                if ($guardado) {
-                    $_SESSION['registro'] = "completado";
-                }else{
-                    $_SESSION['registro'] = "error";
-                }
-            }else{
-                $_SESSION['registro'] = "error";
+    	        $usuario->guardar();
             }
-        }else{
-            $_SESSION['registro'] = "error";
         }
-        header('Location:'.base_url.'usuario/registrar'); //NOTE: una vez terminado o no el registro nos rediriga a la misma pagina
+        header('Location:'.base_url);
     }
 
     public function logeo(){
