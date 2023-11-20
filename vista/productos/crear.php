@@ -7,7 +7,7 @@
         <?php $id = 0;?>
     <?php endif;?>
 
-    <form onsubmit="alerta_producto(<?=$id?>)">
+    <form>
         <label for="categoria">Categoria:</label>
         <?php $categorias = Utilidades::mostrarCategorias(); ?>
         <select name="categoria" id="categoriaProducto">
@@ -35,6 +35,9 @@
         <?php endif;?>
         <input type="file" name="imagen" id="imagenProducto">
 
-        <input type="submit" value="Guardar producto">
+        <div>
+            <button onclick="volverAtras()" class="boton-atras">Volver</button>
+            <button onclick="alerta_producto(<?=$id?>)">Guardar</button>
+        </div>
     </form>
 </section>

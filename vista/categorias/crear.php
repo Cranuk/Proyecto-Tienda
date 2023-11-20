@@ -6,11 +6,16 @@
         <h1 class="sin-borde">Crear categoria</h1>
         <?php $id = 0;?>
     <?php endif;?>
-    <form onsubmit="alerta_categoria(<?=$id?>)">
+    <form>
         <label for="nombre">
             Nombre:
         </label>
         <input type="text" name="nombre" id="nombreCategoria" value="<?=isset($categoria) ? $categoria['caia_nombre'] : "";?>" required>
-        <input type="submit" value="Guardar categoria">
+
+        <div>
+            <button onclick="volverAtras()" class="boton-atras">Volver</button>
+            <button onclick="alerta_categoria(<?=$id?>)">Guardar</button>
+        </div>
+        
     </form>
 </section>

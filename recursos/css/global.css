@@ -92,6 +92,13 @@ b{
     color: #e5e5e5;
 }
 
+.boton-atras{
+    background: none;
+    border: none;
+    color: #32373b;
+    text-decoration: solid underline 2px;
+}
+
 .boton-herramienta:hover{
     background-color: #32373b;
     color: #e5e5e5;
