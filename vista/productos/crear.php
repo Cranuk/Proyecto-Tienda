@@ -10,7 +10,7 @@
     <form onsubmit="alerta_producto(<?=$id?>)">
         <label for="categoria">Categoria:</label>
         <?php $categorias = Utilidades::mostrarCategorias(); ?>
-        <select name="categoria" id="categoria">
+        <select name="categoria" id="categoriaProducto">
             <?php foreach ($categorias as $categoria) : ?>
                 <option value="<?= $categoria['id_categoria'] ?>" <?=isset($producto) && $categoria['id_categoria'] == $producto['categoria_id'] ? "selected" : "";?>>
                 <?= $categoria['caia_nombre'] ?></option>
@@ -18,22 +18,22 @@
         </select>
 
         <label for="nombre">Nombre:</label>
-        <input type="text" name="nombre" id="nombre" value="<?=isset($producto) ? $producto['pros_nombre'] : "";?>">
+        <input type="text" name="nombre" id="nombreProducto" value="<?=isset($producto) ? $producto['pros_nombre'] : "";?>">
 
         <label for="descripcion">Descripcion:</label>
-        <textarea name="descripcion" id="descripcion"><?=isset($producto) ? $producto['pros_descripcion'] : "";?></textarea>
+        <textarea name="descripcion" id="descripcionProducto"><?=isset($producto) ? $producto['pros_descripcion'] : "";?></textarea>
 
         <label for="precio">Precio:</label>
-        <input type="text" name="precio" id="precio" value="<?=isset($producto) ? $producto['pros_precio'] : "";?>">
+        <input type="text" name="precio" id="precioProducto" value="<?=isset($producto) ? $producto['pros_precio'] : "";?>">
 
         <label for="stock">Stock:</label>
-        <input type="number" name="stock" id="stock" value="<?=isset($producto) ? $producto['pros_stock'] : "";?>">
+        <input type="number" name="stock" id="stockProducto" value="<?=isset($producto) ? $producto['pros_stock'] : "";?>">
 
         <label for="imagen">Imagen:</label>
         <?php if(isset($producto) && !empty($producto['pros_imagen'])):?>
             <img src="<?=base_url?>subidas/productos/<?=$producto['pros_imagen']?>" alt="imagen del producto" class="miniatura">
         <?php endif;?>
-        <input type="file" name="imagen" id="imagen">
+        <input type="file" name="imagen" id="imagenProducto">
 
         <input type="submit" value="Guardar producto">
     </form>

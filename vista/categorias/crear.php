@@ -10,7 +10,7 @@
         <label for="nombre">
             Nombre:
         </label>
-        <input type="text" name="nombre" id="nombre" value="<?=isset($categoria) ? $categoria['caia_nombre'] : "";?>" required>
+        <input type="text" name="nombre" id="nombreCategoria" value="<?=isset($categoria) ? $categoria['caia_nombre'] : "";?>" required>
         <input type="submit" value="Guardar categoria">
     </form>
 </section>

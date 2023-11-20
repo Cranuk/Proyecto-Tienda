@@ -1,71 +1,46 @@
-function alerta_usuario(){
+function alerta_usuario() {
     event.preventDefault();
-    let nombre = document.querySelector('#nombre').value;
-    let apellido = document.querySelector('#apellido').value;
-    let correo = document.querySelector('#correo').value;
-    let clave = document.querySelector('#clave').value;
+    let nombre = document.getElementById('nombreUsuario').value;
+    let apellido = document.getElementById('apellidoUsuario').value;
+    let correo = document.getElementById('correoUsuario').value;
+    let clave = document.getElementById('claveUsuario').value;
+    
     Swal.fire({
         title: 'Confirmar tus datos',
-        text: "Desea guardar los datos ingresados?",
+        text: "¿Desea guardar los datos ingresados?",
         icon: 'question',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
         cancelButtonText: 'Cancelar',
-        confirmButtonText: 'Si'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                guardar_usuario(nombre, apellido, correo, clave);
-            }
-        });
+        confirmButtonText: 'Sí'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            guardar_usuario(nombre, apellido, correo, clave);
+        }
+    });
 }
 
 function guardar_usuario(nombre, apellido, correo, clave) {
-    let direccion;
-    direccion = 'usuario/guardar';
-
-    const formData = new FormData();
-    formData.append('nombre', nombre);
-    formData.append('apellido', apellido);
-    formData.append('correo', correo);
-    formData.append('clave', clave);
+    let direccion = 'usuario/guardar';
 
     $.ajax({
         url: baseUrl + direccion,
         type: "POST",
-        data: formData,
-        contentType: false,
-        processData: false,
-        success: function (response) {
-            console.log(response);
-            if (response['status'] === "duplicado") {
-                Swal.fire(
-                    'Error',
-                    'El correo ya está en uso',
-                    'error'
-                );
-            } else if (response['status'] === "registrado") {
-                Swal.fire(
-                    'Acción exitosa',
-                    'El usuario ha sido registrado',
-                    'success'
-                ).then(() => {
-                    location.reload();
-                });
-            } else {
-                Swal.fire(
-                    'Error',
-                    'Hubo un problema al procesar la solicitud',
-                    'error'
-                );
-            }
+        data: {
+            nombre: nombre,
+            apellido: apellido,
+            correo: correo,
+            clave: clave
         },
-        error: function () {
+        success: function () {
             Swal.fire(
-                'Error',
-                'Hubo un problema al procesar la solicitud',
-                'error'
-            );
+                'Exito',
+                'Usuario registrado correctamente',
+                'success'
+            ).then(() => {
+                location.reload();
+            })
         }
     });
 }
@@ -73,7 +48,7 @@ function guardar_usuario(nombre, apellido, correo, clave) {
 // TODO: id = 0 crea nueva categoria / id > 0 editar una categoria
 function alerta_categoria(id){
     event.preventDefault();
-    let nombre = document.querySelector('#nombre').value;
+    let nombre = document.getElementById('nombreCategoria').value;
     Swal.fire({
         title: 'Guardar la categoria?',
         text: "Desea guardar los datos ingresados?",
@@ -119,12 +94,12 @@ function guardar_categoria(id, nombre){
 
 function alerta_producto(id){
     event.preventDefault();
-    let categoria = document.querySelector('#categoria').value;
-    let nombre = document.querySelector('#nombre').value;
-    let descripcion = document.querySelector('#descripcion').value;
-    let precio = document.querySelector('#precio').value;
-    let stock = document.querySelector('#stock').value;
-    let imagen = document.querySelector('#imagen').value;
+    let categoria = document.getElementById('categoriaProducto').value;
+    let nombre = document.getElementById('nombreProducto').value;
+    let descripcion = document.getElementById('descripcionProducto').value;
+    let precio = document.getElementById('precioProducto').value;
+    let stock = document.getElementById('stockProducto').value;
+    let imagen = document.getElementById('imagenProducto').value;
     Swal.fire({
         title: 'Guardar el producto?',
         text: "Desea guardar los datos ingresados?",
@@ -149,21 +124,18 @@ function guardar_producto(id, categoria, nombre, descripcion, precio, stock, ima
         direccion = 'producto/guardar';
     }
 
-    const formData = new FormData();
-    formData.append('id', id);
-    formData.append('categoria', categoria);
-    formData.append('nombre', nombre);
-    formData.append('descripcion', descripcion);
-    formData.append('precio', precio);
-    formData.append('stock', stock);
-    formData.append('imagen', imagen); // Agregar la imagen al FormData
-
     $.ajax({
         url: baseUrl + direccion,
         type: "POST",
-        data: formData, // Usar el objeto FormData como data
-        contentType: false, // Importante: desactivar el contentType
-        processData: false, // Importante: desactivar el processData
+        data: {
+            id: id,
+            categoria: categoria,
+            nombre: nombre,
+            descripcion: descripcion,
+            precio: precio,
+            stock: stock,
+            imagen: imagen
+        },
         success: function () {
             Swal.fire(
                 'Accion exitosa',

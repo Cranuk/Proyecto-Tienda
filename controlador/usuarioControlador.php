@@ -9,24 +9,26 @@ class usuarioControlador{
         require_once 'vista/usuarios/registro.php';
     }
 
-    public function guardar(){
-        if (isset($_POST)) {
+    public function guardar() {
+        if(isset($_POST)){
             $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : false;
             $apellido = isset($_POST['apellido']) ? $_POST['apellido'] : false;
             $correo = isset($_POST['correo']) ? $_POST['correo'] : false;
             $clave = isset($_POST['clave']) ? $_POST['clave'] : false;
-
+    
             if ($nombre && $apellido && $correo && $clave) {
                 $usuario = new UsuarioModelo;
                 $usuario->setNombre($nombre);
                 $usuario->setApellido($apellido);
                 $usuario->setCorreo($correo);
                 $usuario->setClave(md5($clave));
-    	        $usuario->guardar();
+
+                $duplicado = $usuario->duplicado($correo);
+                $usuario->guardar();
             }
         }
-        header('Location:'.base_url);
-    }
+    }    
+    
 
     public function logeo(){
         if(isset($_POST)){
