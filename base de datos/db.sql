@@ -2,7 +2,7 @@ CREATE DATABASE base_tienda;
 USE base_tienda;
 
 CREATE TABLE usuarios(
-    id_usuario      int(255) auto_increment not null,
+    id_usuario      int(11) auto_increment not null,
     usos_nombres    varchar(100) not null,
     usos_apellidos  varchar(255),
     usos_correo     varchar(255) not null,
@@ -14,7 +14,7 @@ CREATE TABLE usuarios(
 ) ENGINE=InnoDb;
 
 CREATE TABLE categorias(
-    id_categoria    int(255) AUTO_INCREMENT not null,
+    id_categoria    int(11) AUTO_INCREMENT not null,
     caia_nombre     varchar(100) not null,
     CONSTRAINT pk_categoria PRIMARY KEY(id_categoria)
 ) ENGINE=InnoDb;
@@ -25,12 +25,12 @@ INSERT INTO categorias VALUES(NULL, "Manga tirantes");
 INSERT INTO categorias VALUES(NULL, "Sudadera");
 
 CREATE TABLE productos(
-    id_producto         int(255) auto_increment not null,
-    categoria_id        int(255) not null,
+    id_producto         int(11) auto_increment not null,
+    categoria_id        int(11) not null,
     pros_nombre         varchar(255) not null,
     pros_descripcion    text,
     pros_precio         float(100,2) not null,
-    pros_stock          int(255) not null,
+    pros_stock          int(11) not null,
     pros_oferta         varchar(2),
     pros_fecha          date not null,
     pros_imagen         varchar(255),
@@ -39,8 +39,8 @@ CREATE TABLE productos(
 )ENGINE=InnoDb;
 
 CREATE TABLE pedidos(
-    id_pedido               int(255) auto_increment not null,
-    usuario_id              int(255) not null,
+    id_pedido               int(11) auto_increment not null,
+    usuario_id              int(11) not null,
     peos_direccion          varchar(255) not null,
     peos_localidad          varchar(255) not null,
     peos_provincia          varchar(255) not null,
@@ -53,10 +53,10 @@ CREATE TABLE pedidos(
 )ENGINE=InnoDb;
 
 CREATE TABLE lineasPedidos(
-    id_lineasPedido         int(255) auto_increment not null,
-    pedido_id               int(255) not null,
-    producto_id             int(255) not null,
-    lios_cantidad           int(255) not null,
+    id_lineasPedido         int(11) auto_increment not null,
+    pedido_id               int(11) not null,
+    producto_id             int(11) not null,
+    lios_cantidad           int(11) not null,
     CONSTRAINT pk_lineasPedido PRIMARY KEY(id_lineasPedido),
     CONSTRAINT fk_lineasPedido_pedido FOREIGN KEY(pedido_id) REFERENCES pedidos(id_pedido),
     CONSTRAINT fk_lineasPedido_producto FOREIGN KEY(producto_id) REFERENCES productos(id_producto)
