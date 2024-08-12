@@ -1,4 +1,11 @@
-# Proyecto-Tienda
-SW para simular un ecommerce, la tiene nivel administrador donde puedes gestionar, tanto los productos y los pedidos de los clientes, se puede crear un usuario donde tendra su historial de pedidos que realiza y los estados de los envios de los mismos.
+## Proyecto-Tienda
+SW ecommerce sencilla para la venta online
 
-Tiene un CRUD de los pedidos como de sus datos personales
+## Funciones del SW
+<ul>
+    <li>Roles</li>
+    <li>CRUD de usuario</li>
+    <li>CRUD de pedidos</li>
+    <li>CRUD de categorias</li>
+    <li>CRUD de productos</li>
+</ul>
