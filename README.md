@@ -1,6 +1,4 @@
 # Proyecto-Tienda
-Una propuesta para una tienda online
-Esta tienda tiene nivel administrador donde puedes gestionar, tanto los productos y los pedidos de los clientes, se puede crear un usuario donde tendra su historia de los pedidos que realiza
-y los estados de los envios de los mismos.
+SW para simular un ecommerce, la tiene nivel administrador donde puedes gestionar, tanto los productos y los pedidos de los clientes, se puede crear un usuario donde tendra su historial de pedidos que realiza y los estados de los envios de los mismos.
 
-Se puede crear productos, controlar su stock.
+Tiene un CRUD de los pedidos como de sus datos personales
