@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="<?=base_url?>recursos/css/categorias.css">
     <link rel="stylesheet" href="<?=base_url?>recursos/css/pedidos.css">
     <link rel="stylesheet" href="<?=base_url?>recursos/css/errores.css">
+    <link rel="icon" href="Proyectos.png" type="image/png">
 </head>
 
 <body>
