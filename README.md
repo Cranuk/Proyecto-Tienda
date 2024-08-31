@@ -19,6 +19,6 @@
 ## 🛠️ Tecnologías Utilizadas
 
 - **Frontend**: HTML5, CSS, JS(sweetAlert),
-- **Backend**: PHP
+- **Backend**: PHP(MVC)
 - **Base de Datos**: MYSQL
 - **Autenticación**: Implementación de autenticación segura para proteger las cuentas de usuario.
