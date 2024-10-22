@@ -6,7 +6,7 @@ define('usuario','root');
 define('clave','');
 
 //ANCHOR: aqui vamos a declarar variables constantes para uso interno del programa
-define('base_url', 'http://mystore/');
+define('base_url', 'http://protiendaphp/');
 define('controlador_default', 'producto');
 define('accion_default','destacado');
 
